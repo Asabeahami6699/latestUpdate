@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/superuser.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    <title>Superuser: <%= name %> </title>
+</head>
+<body>
+    <div class="background-container">
+        <img class="imgsuper" src="imgs and icons/wall2.jpg" alt="Background Image">
+        <div class="side-bar">
+            <p>Welcome, <%= name %>.</p>
+            <ul>
+                <ul>
+                    <li><img src="imgs and icons/speedometer-ezgif.com-resize.gif" alt="" class="image-edit" >&nbsp;<span class="text-li" onclick="showForm('dashboard-form')">Dashboard</span>
+                    </li>
+                    <li><img src="imgs and icons/walletnew-ezgif.com-resize.gif" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('choose-menu')">Transactions</span>
+                    </li>
+                    <li><img src="imgs and icons/safebox-ezgif.com-resize 233.gif" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('susu-form')">Susu</span>
+                    </li>
+                    <li><img src="imgs and icons/settingsnew1-ezgif.com-resize 22.gif" alt="" class="image-edit" > &nbsp;<span class="text-li" onclick="showForm('settings-form')">Settings</span>
+                    </li>
+                    <li><img src="imgs and icons/jpeg-optimizer_information.gif" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('help-form')">Help</span>
+                    </li>
+                    <li>
+                        <img src="imgs and icons/logout new.gif" alt="" class="image-edit" >&nbsp; 
+                        <div class="logout-btn">
+                            <form action="/logout?_method=DELETE" method="POST">
+                                <button type="submit">Log Out</button>
+                            </form>  
+                        </div>                     
+                    </li>                         
+            </ul>
+        </div>
+        <div class="main-super">
+            <div class="eco-container">
+                <p> ECOBANK-SECTION(54) </p>
+                <p> ECOBANK-SECTION(20) </p>
+                <p> ECOBANK-SECTION(10) </p>
+                <p> ECOBANK-SECTION(80) </p>
+                <div class="eco-disp">
+                    <h1>Opening Balance(54)</h1>
+                    <h2>GHC <%= E1obl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Opening Balance(20)</h1>
+                    <h2>GHC <%= E2obl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Opening Balance(10)</h1>
+                    <h2>GHC <%= E3obl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Opening Balance(80)</h1>
+                    <h2>GHC <%= E4obl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>E-Cash Collected(54)</h1>
+                    <h2>GHC <%= E1cas%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>E-Cash Collected(20)</h1>
+                    <h2>GHC <%= E2cas%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>E-Cash Collected(10)</h1>
+                    <h2>GHC <%= E3cas%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>E-Cash Collected(80)</h1>
+                    <h2>GHC <%= E4cas%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Amount Transfered(54)</h1>
+                    <h2>GHC <%= E1tfa%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Amount Transfered(20)</h1>
+                    <h2>GHC <%= E2tfa%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Amount Transfered(10)</h1>
+                    <h2>GHC <%= E3tfa%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Amount Transfered(80)</h1>
+                    <h2>GHC <%= E4tfa%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Total Current Balance(54)</h1>
+                    <h2>GHC <%= E1cbl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Total Current Balance(20)</h1>
+                    <h2>GHC <%= E2cbl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Total Current Balance(10)</h1>
+                    <h2>GHC <%= E3cbl%></h2>
+                </div>
+                <div class="eco-disp">
+                    <h1>Total Current Balance(80)</h1>
+                    <h2>GHC <%= E4cbl%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p> MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Opening Balance</h1>
+                    <h2>GHC <%= Mobcl%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>E-Cash Collected</h1>
+                    <h2>GHC <%= Ecash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= Mtfa%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Current Balance</h1>
+                    <h2>GHC <%= Mcbl%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Opening Balance</h1>
+                    <h2>GHC GHC <%= Fobl%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>E-Cash Collected</h1>
+                    <h2>GHC GHC <%= Fecas%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC GHC <%= Ftfa%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Current Balance</h1>
+                    <h2>GHC GHC <%= Fcbl%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Opening Balance</h1>
+                    <h2>GHC GHC <%= Cobl%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>E-Cash Collected</h1>
+                    <h2>GHC GHC <%= Cecas%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC GHC <%= Ctfa%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Current Balance</h1>
+                    <h2>GHC GHC <%= Ccbl%></h2>
+                </div>
+            </div>
+        </div>
+        <div id="overlay">
+            <div id="dashboard-form" class="popup-form">
+                <h2>View Other Page</h2>
+                <form action="/superuser2" method="get">
+                    <button type="submit" >Visit</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="AllPayment-form" class="popup-form">
+                <h2>All Transactions Form</h2>
+                <p id="err1" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform1" action="/Spayment" method="post">
+                    <label for="type">Transaction Type:</label>
+                    <select id="T-type" name="TransType" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="mtn">MTN MoMo</option>
+                        <option value="ecobank">Ecobank</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="calbank">Calbank</option>
+                        <option value="other banks">Other Banks</option>
+                    </select>
+                    <label for="Brch-type">Branch Type:</label>
+                    <select id="branch" name="branch" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="Aiyinase">Aiyinase</option>
+                        <option value="Prestea">Prestea</option>
+                        <option value="Bogoso">Bogoso</option>
+                    </select>
+                    <label for="view-Teller">Teller Type:</label>
+                    <select id="tell" name="teller" required>
+                        <option value="tel" disabled selected hidden>......</option>
+                        <option value="Teller-1">Teller 1</option>
+                        <option value="Teller-2">Teller 2</option>
+                    </select>
+                    <label for="amount">Amount in Number(s):</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter The Amount of Money Here" required>
+                    <button type="button" onclick="Confir1()">Next</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir1" class="popup-form">
+                <h2>Confirm Your Transaction</h2>
+                <p class="con-txt">Type: <span id="confir1-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Branch: <span id="confir1-brh" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Teller: <span id="confir1-tll" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir1-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi1()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back1()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="settings-form" class="popup-form">
+                <h2>Settings Menu</h2>
+                <form>
+                    <button type="button" onclick="ShowDataBaseForm()">Database Menu</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="susu-form" class="popup-form">
+                <h2>Susu Savings Menu</h2>
+                <form>
+                    <P>PLEASE THIS FUNCTION IS UNDER DEVELOPMENT, STAY TUNE!</P>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="help-form" class="popup-form">
+                <h2>Help Menu</h2>
+                <form>
+                    <p> FOR ANY HELP , CONTACT THE ADMINISTRATOR</p>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="user-input-form" class="popup-form">
+                <h2>Opening Balance</h2>
+                <form id="Sform2" action="/SuperuserInput1" method="post">
+                    <p id="err2" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                    <label for="payment-type">Opening Balance Type:</label>
+                    <select id="payment-type1" name="paymenttype" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                        <option value="MobileMoney">Mobile Money (MoMo)</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Calbank">Calbank</option>
+                    </select>
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="openAmt" placeholder="Enter Opening Balance here" required>
+                    <label for="view-Teller" style="display:none;">Type:</label>
+                    <select id="open" name="openb" style="display:none;" required>
+                        <option value="Opening Balance" selected >Opening Balance</option>
+                    </select>
+                    <button type="button"onclick="confir2()">Next</button>
+                </form>
+                <hr>
+                <h2>E-Cash Collected</h2>
+                <form id="Sform3" action="/SuperuserInput2" method="post">
+                    <p id="err3" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                    <label for="payment-type">Type Of E-Cash Collected:</label>
+                    <select id="payment-type2" name="paymenttype" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                        <option value="MobileMoney">Mobile Money (MoMo)</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Calbank">Calbank</option>
+                    </select>
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="depositedAmount" placeholder="Enter E-Cash Collected here" required>
+                    <label for="view-Teller" style="display:none;">Type:</label>
+                    <select id="depo" name="deposits" style="display:none;" required>
+                        <option value="E-Cash" selected >E-Cash Collected</option>
+                    </select>
+                    <button type="button" onclick="confir3()">Next</button>
+                </form>
+                <hr>
+                <h2>Commissions & MoMo Charges</h2>
+                <form id="Sform4" action="/SuperuserInput3" method="post">
+                    <p id="err4" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                    <label for="payment-type">Teller's Branch:</label>
+                    <select id="branch2" name="branch" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="Aiyinase">Aiyinase</option>
+                        <option value="Prestea">Prestea</option>
+                        <option value="Bogoso">Bogoso</option>
+                    </select>
+                    <label for="view-Teller">Teller Type:</label>
+                    <select id="teller2" name="teller" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="Teller-1">Teller 1</option>
+                        <option value="Teller-2">Teller 2</option>
+                    </select>
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="CommAmt" placeholder="Enter Amount here" required>
+                    <label for="view-Teller">Type:</label>
+                    <select id="com-typ" name="Commissions" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="Commission">Commission</option>
+                        <option value="Charges(momo)">MoMo Charges</option>
+                    </select>
+                    <button type="button" onclick="confir4()">Next</button>
+                    <hr>
+                    <button type="button" onclick="OtherEntries()">More Options</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir2" class="popup-form">
+                <h2>Confirm Your Opening Balance Record</h2>
+                <p class="con-txt">Type of Opening Balance: <span id="confir2-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir2-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir2-ty" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi2()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back2()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="confir3" class="popup-form">
+                <h2>Confirm Your Ecash Collected Record</h2>
+                <p class="con-txt">Type of Ecash Collected: <span id="confir3-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir3-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir3-ty" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi3()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back3()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir4" class="popup-form">
+                <h2>Confirm Your Inputs</h2>
+                <p class="con-txt">Teller's Branch: <span id="confir4-brch" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Teller's Type: <span id="confir4-tt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir4-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir4-typ" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi4()">Confirm and Submit</button>
+                <button type="button" onclick="Back4()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="data-form" class="popup-form">
+                <h2>Database Menu</h2>
+                <form action="" method="get">
+                    <label for="database">Choose Branch:</label>
+                    <select id="branch" name="branch" required>
+                        <option value="" disabled selected hidden>......</option>
+                        <option value="Aiyinase-Dashboard">Aiyinase</option>
+                        <option value="Prestea-Dashboard">Prestea</option>
+                        <option value="Bogoso-Dashboard">Bogoso</option>
+                    </select>
+                    <label for="view-Teller">Teller Type:</label>
+                    <select id="teller" name="teller" required>
+                        <option value="" disabled selected hidden>......</option>
+                        <option value="Teller 1">Teller 1</option>
+                        <option value="Teller 2">Teller 2</option>
+                    </select>
+                    <label for="transaction-type">Transaction Type:</label>
+                    <select id="transaction-type" name="transaction-type" required>
+                        <option value="" disabled selected hidden>......</option>
+                        <option value="momo">Mobile Money (MoMo)</option>
+                        <option value="ecobank">Ecobank</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Others">Calbank</option>
+                    </select>
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" required>
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" required>
+                    <button type="button">Download Data</button>
+                    <hr>
+                    <p>PLEASE GO TO THE OTHER PAGE TO DOWNLOAD YOUR DOCUMENT(S)</p>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="choose-menu" class="popup-form">
+                <h2>Choose An Option</h2>
+                <form>
+                    <button type="button" onclick="AllPaymentForm()">Make Transaction</button>
+                    <hr>
+                    <button type="button" onclick="UserInputDataForm()">User Inputs</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="OtherEntries-form" class="popup-form">
+                <h2>All Transactions Total Entries</h2>
+                <p id="err5" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform5" action="/SuperuserInput4" method="post">
+                    <label for="payment-type">Entry Type:</label>
+                    <select id="payment-type3" name="Account" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                        <option value="Mobile Money(MTN)">Mobile Money (MTN)</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Calbank">Calbank</option>
+                        <option value="other banks">Other Banks</option>
+                    </select>
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="EntryAmt" placeholder="Enter The Amount here" required>
+                    <label for="view-Teller" style="display:none;">Type:</label>
+                    <select id="entrs" name="entries" style="display:none;" required>
+                        <option value="Total Entries" selected >Total Entries</option>
+                    </select>
+                    <button type="button" onclick="confir5()">Next</button>
+                </form>
+                <hr>
+                <h2>Ecobank Cash out</h2>
+                <p id="err6" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform6" action="/SuperuserInput5" method="post">
+                    <label for="payment-type">Ecobank Bank Account Type:</label>
+                    <select id="Account-type1" name="Account" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                    </select>
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="EcoCashOut" placeholder="Enter Ecobank Cash out Amount here" required>
+                    <label for="view-Teller" style="display:none;">Type:</label>
+                    <select id="cashout" name="Cashout" style="display:none;" required>
+                        <option value="Ecobank Cash out" selected >Ecobank Cash out</option>
+                    </select>
+                    <button type="button" onclick="confir6()">Next</button>
+                </form>
+                <hr>
+                <h2>Fidelity Withdrawals</h2>
+                <p id="err7" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform7" action="/SuperuserInput6" method="post">
+                    <label for="view-Teller">Amount:</label>
+                    <input type="number" step="ANY" name="FAmount" placeholder="Enter Fidelity Withdrawals Amount here" required>
+                    <label for="view-Teller" style="display:none;">Type:</label>
+                    <select id="fidelt" name="Fidel" style="display:none;" required>
+                        <option value="Fidelity Withdrawals" selected >Fidelity Withdrawals</option>
+                    </select>
+                    <label for="payment-type" style="display:none;">The Account:</label>
+                    <select id="payment-typeF" name="Account" style="display:none;" required>
+                        <option value="Fidelity Bank" selected>Fidelity Bank Account</option>
+                    </select>
+                    <button type="button" onclick="confir7()">Next</button>
+                </form>
+                <hr>
+                <h2>Other Deposits</h2>
+                <p id="err8" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform8" action="/SuperuserInput7" method="post">
+                    <label for="view-Teller">Transaction Type:</label>
+                    <select id="otselt" name="otherEco" required>
+                    <option value="null" disabled selected hidden>......</option>
+                    <option value="Other Ecobank Deposits">Ecobank</option>
+                    <option value="Other MTN MoMo Deposits">MTN MoMo</option>
+                    </select>
+                    <label for="payment-type">Choose The Account:</label>
+                    <select id="Account-type2" name="Account" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                        <option value="The MoMo Account">Mobile Money (MTN)</option>
+                    </select>
+                    <label for="view-Teller">The Amount:</label>
+                    <input type="number" step="ANY" name="OtAmount" placeholder="Enter Amount here" required>
+                    <button type="button" onclick="confir8()">Next</button>
+                </form>
+                <hr>
+                <h2>INTERBANK TRANSACTIONS</h2>
+                <p id="err9" class="error">PLEASE ALL FIELDS ARE REQUIRED!!</p>
+                <form id="Sform9" action="/SuperuserInput9" method="post">
+                    <label for="payment-type">Choose The Account:</label>
+                    <select id="Account-type3" name="InterAccount" required>
+                        <option value="null" disabled selected hidden>......</option>
+                        <option value="ecobank 54">Ecobank 54</option>
+                        <option value="ecobank 20">Ecobank 20</option>
+                        <option value="ecobank 10">Ecobank 10</option>
+                        <option value="ecobank 80">Ecobank 80</option>
+                    </select>
+                    <label >The Amount:</label>
+                    <input type="number" step="ANY" name="InterAmount" placeholder="Enter Amount here" required>
+                    <label >The Commission:</label>
+                    <input type="number" step="ANY" name="InterComm" placeholder="Enter its Commission here" required>
+                    <button type="button" onclick="confir9()">Next</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir5" class="popup-form">
+                <h2>Confirm Total Entries For An Account</h2>
+                <p class="con-txt">Entry Type/Account: <span id="confir5-entr" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir5-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir5-typ" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi5()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back5()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir6" class="popup-form">
+                <h2>Confirm Your Ecobank Cashout</h2>
+                <p class="con-txt">Ecobank Bank Account: <span id="confir6-cnt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir6-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir6-typ" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi6()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back6()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confir7" class="popup-form">
+                <h2>Confirm Your Fidelity Withdrawal</h2>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir7-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Type: <span id="confir7-typ" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Bank Account: <span id="confir7-cnt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi7()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back7()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="confir8" class="popup-form">
+                <h2>Confirm Your Other Deposit Details</h2>
+                <p class="con-txt">Transaction Type: <span id="confir8-tt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">The Account: <span id="confir8-acnt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confir8-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi8()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back8()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="confir9" class="popup-form">
+                <h2>Confirm Your InterBank Deposit Details</h2>
+                <p class="con-txt">The Account: <span id="confir9-tt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">The Amount: <span id="confir9-amt" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">The Commission: <span id="confir9-comm" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitConfi9()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back9()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <span id="loading" class="loader"></span>
+            <div id="failure-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-wrong.gif" >
+                    <div>The Record is not Saved Due to an Error, Please Try Again !</div>
+                </div>
+            </div>
+            <div id="successful-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/Animation-check-new.gif">
+                    <div>The Record is successfully Saved !</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="src/superuser.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+    

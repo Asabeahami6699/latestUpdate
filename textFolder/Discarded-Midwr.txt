@@ -1,0 +1,4 @@
+<script src="src/inactivityTimer.js"></script>
+
+const logoutTime = 5 * 60 * 60 * 1000;
+

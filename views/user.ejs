@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/user.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    
+
+    <title><%= branch %> <%= tellertype %> Dashboard</title>
+</head>
+<body>
+    <div class="background-container">
+        <img class="imgsuper" src="imgs and icons/wall1.jpg" alt="Background Image">
+        <div class="side-bar">
+            <p>Welcome ,<%= name %>.</p>
+            <ul>
+                <ul>
+                    <li><img src="imgs and icons/dollars.png" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('choose')">Transactions</span>
+                    </li>
+                    <li><img src="/imgs and icons/icons8-atm-96.png" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('Withdrawal-form')">Withdrawal</span>
+                    </li>
+                    <li><img src="imgs and icons/bank.png" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('susu-form')">Susu</span>
+                    </li>
+                    <li><img src="imgs and icons/circle.png" alt="" class="image-edit" > &nbsp;<span class="text-li" onclick="showForm('settings-form')">Settings</span>
+                    </li>
+                    <li><img src="imgs and icons/icons8-calculator-50.png" alt="" class="image-edit" >&nbsp; <span class="text-li" onclick="showForm('help-form')">Calculator</span>
+                    </li>
+                    <li><img src="imgs and icons/turn-off.png" alt="" class="image-edit" >&nbsp;  <span class="text-li" >
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button class="piff" type="submit">Log Out</button>
+                        </form>    
+                    </span>
+                    </li>
+            </ul>
+        </div>
+        <div class="main-super">
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= count %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= transferredAmount %></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= countF %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= FtransferredAmount %></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= countE %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= EtransferredAmount %></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= countC %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= CtransferredAmount %></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= odcount %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot">VODA-CASH-SECTION</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Transfered</h1>
+                    <h2>GHC <%= VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= TotalCostumers %></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Transfered</h1>
+                    <h2>GHC <%= TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp1">
+                    <h1> Total Physical Cash</h1>
+                    <h2>GHC <%= TTotalcPcash%></h2>
+                </div>
+            </div>    
+        </div>
+        <div id="overlay">
+
+            <div id="Withdrawal-form" class="popup-form">
+                <h2 class="form-title">Withdrawal Menu</h2>
+                <form action="/downloadUserWdwl" method="post">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                    <button type="submit" >Download Withdrawal Data</button>
+                </form>
+                <hr>
+                <form>
+                    <button type="button" onclick="ShowWithDashbd()"> Withdrawal Dashboard</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="Bpayment-form" class="popup-form">
+                <h2 class="form-title">Bank Payment Form</h2>
+                <form id="BpaymentForm" action="/Userbpayment" method="post">
+                    <label for="Bpayment-type">Bank Type:</label>
+                    <select id="bank-type" name="BankType" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="ecobank">Ecobank</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Calbank">Calbank</option>
+                        <option value="Other Banks">Other Banks</option>
+                    </select>
+                    <label for="description-type">Description Type:</label>
+                    <select id="description-type" name="description" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdrawal">Withdrawal</option>
+                    </select>
+                    <label for="account-numb">Slip Number:</label>
+                    <input type="number" name="AccountNumber" placeholder="Enter Slip Number Here" required>
+                    <label for="name">Name of Beneficial:</label>
+                    <input type="text" name="Bname" placeholder="Name" required>
+                    <label for="amount">Amount in Number(s):</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter Amount Here" required>
+                    <label for="amount">Commission:</label>
+                    <input type="number"step="ANY" name="Commission" placeholder="Enter Commission Here" required>
+                    <p id="errorSms4" class="error" style="display:none;">Please all fieds are required!!</p>
+                    <button type="button" onclick="showConfirmationForm()">Preview Inputs</button>
+                    <hr>
+                    <button type="button" onclick="bankBack()">Back</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmation-form1" class="popup-form">
+                <h2 class="form-title">Confirm Your Bank Transaction</h2>
+                <p class="con-txt">Bank Type: <span id="confirm-bank-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Description Type: <span id="confirm-description" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Slip Number: <span id="confirm-account-number" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Name of Beneficiary: <span id="confirm-name" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confirm-amount" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Commission: <span id="confirm-commission" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="confirmAndSubmit()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back1()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="OtherWithdls-form" class="popup-form">
+                <h2 class="form-title">Other Withdrawal Form</h2>
+                <p id="errorSms3" class="error" style="display:none;">Please all fields are required!!</p>
+                <form id="otherWithdrawalForm" action="/UserOtherTrans" method="post">
+                    <label for="withdrawal-type">Withdrawal Type:</label>
+                    <select id="withdrawal-type" name="withdrawalType" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="G-Money">G-Money</option>
+                        <option value="ATM">ATM</option>
+                        <option value="Ezwich">Ezwich</option>
+                        <option value="Remittances">Remittances</option>
+                    </select>
+                    <label for="name">Name of Beneficial:</label>
+                    <input type="text" name="Bname" placeholder="Enter Name Here" required>
+                    <label for="amount">Amount in Number(s):</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter Amount Here" required>
+                    <button type="button" onclick="showOtherWithdrawalConfirmationForm()">Preview Inputs</button>
+                    <hr>
+                    <button type="button" onclick="owlBack()">Back</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmation-form2" class="popup-form">
+                <h2 class="form-title">Confirm Your Withdrawal Transaction</h2>
+                <p class="con-txt">Withdrawal Type: <span id="confirm-withdrawal-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Name of Beneficiary: <span id="confirm-other-name" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confirm-other-amount" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitOtherWithdrawalForm()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back2()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="settings-form" class="popup-form">
+                <h2 class="form-title">Settings Menu</h2>
+                <form action="/downloadUserDep" method="post">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                    <button type="submit" >Download Deposit Data</button>
+                    <hr>
+                    <button type="button" onclick="TBalanceForm()">Transaction Balances</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="Susutransc-form" class="popup-form">
+                <h2 class="form-title">SUSU Transactions Form</h2>
+                <p id="errorSms2" class="error" style="display:none;">Please all fields are required!!</p>
+                <form id="susuTransForm" action="/susutransform" method="post">
+                    <label for="name">Name of Beneficial:</label>
+                    <input type="text" name="name" placeholder="Enter Name Here" required>
+                    <label for="description-type">Description Type:</label>
+                    <select id="susu-description-type" name="description" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdrawal">Withdrawal</option>
+                    </select>
+                    <label for="account-numb">Slip Number:</label>
+                    <input type="number" name="AccountNumber" placeholder="Enter Slip Number Here" required>
+                    <label for="amount">Amount in Number(s):</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter Amount Here" required>
+                    <button type="button" onclick="showSusuConfirmationForm()">Preview Inputs</button>
+                    <hr>
+                    <button type="button" onclick="susuBack()">Back</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmation-form3" class="popup-form">
+                <h2 class="form-title">Confirm Your SuSu Transaction</h2>
+                <p class="con-txt">Name: <span id="confirm-susu-name" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Description Type: <span id="confirm-susu-description" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Slip Number: <span id="confirm-susu-account-number" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confirm-susu-amount" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitSusuTransForm()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back3()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>            
+            <div id="susu-form" class="popup-form">
+                <h2 class="form-title">Susu Savings Menu</h2>
+                <form>
+                    <p>THIS FUNCTION IS UNDER DEVELOPMENT, PLEASE STAY TUNE!</p> 
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            
+            <div id="user-input-form" class="popup-form">
+                <h2 class="form-title">User Inputs Menu</h2>
+                <form id="Uform1" action="/UserInputs1" method="post">
+                    <h3 class="note1" style="text-align: center;">INITIAL PHYSICAL CASH:</h3>
+                    <select id="open" name="openb" style="display:none;" required>
+                        <option value="Initial Physical Cash" selected>Initial Physical Cash</option>
+                    </select>
+                    <label>The Amount</label>
+                    <input type="number" step="ANY" name="Intialamount" placeholder="Enter Initial Physical Cash Amount Here" required>
+                    <label>The Description</label>
+                    <input id="payment-type1" type="text" step="ANY" name="TranscType" placeholder="Enter The Description Here" required>
+                    <p id="error-messageIPC" class="error" style="display:none;">Please all fields are required</p>
+                    <button type="button" onclick="UserInputsConfirmationForm(1)">Preview Inputs</button>
+                </form>
+                <hr>          
+                <form id="Uform2" action="/UserInputs2" method="post">
+                    <h3 class="note1" style="text-align: center;">PHYSICAL CASH COLLECTED:</h3>
+                    <select id="depo" name="deposit" style="display:none;" required>
+                        <option value="Physical Cash Collected" selected>Physical Cash Collected</option>
+                    </select>
+                    <label>The Amount</label>
+                    <input type="number" step="ANY" name="depositedamount" placeholder="Enter Physical Cash Collected Amount Here" required>
+                    <label>The Description</label>
+                    <input id="payment-type2" type="text" step="ANY" name="TranscdType" placeholder="Enter The Description Here" required>
+                    <p id="error-messagePCC" class="error" style="display:none;">Please all fields are required</p>
+                    <button type="button" onclick="UserInputsConfirmationForm(2)">Preview Inputs</button>
+                </form>
+                <hr>
+                <form id="Uform3" action="/UserInputs3" method="post">
+                    <h3 class="note1" style="text-align: center;">OTHER INPUTS:</h3>
+                    <label>Choose</label>
+                    <select id="payment-type3" name="selt" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Expenses">Expenses</option>
+                        <option value="Cash To Bank">Cash To Bank</option>
+                        <option value="Physical Cash Remaining">Physical Cash Remaining</option>
+                    </select>
+                    <label for="amt">Description:</label>
+                    <input type="text" name="factor" placeholder="Enter The Description Here" required>
+                    <label for="amt">Amount:</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter The Amount Here" required>
+                    <p id="error-messageECP" class="error" style="display:none;">Please all fields are required</p>
+                    <button type="button" onclick="UserInputsConfirmationForm(3)">Preview Inputs</button>
+                    <hr>
+                    <button type="button" onclick="userBack()">Back</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmation-form4" class="popup-form">
+                <h2 class="form-title">Confirm Your Inputs</h2>
+                <div id="confirmation-content"></div>
+                <button type="button" id="confirm-UI">Confirm and Submit</button>
+                <button type="button" onclick="Back4()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="choose" class="popup-form">
+                <h2 class="form-title">Choose An Option</h2>
+                <form>
+                    <button type="button" onclick="MPaymentForm()">Mobile Money Transactions</button>
+                    <hr>
+                    <button type="button" onclick="BPaymentForm()">Bank Transactions</button>
+                    <hr>
+                    <button type="button" onclick="SPaymentForm()">SuSu Transactions</button>
+                    <hr>
+                    <button type="button" onclick="ShowWithdlOthers()">Other Withdwl. Transactions</button>
+                    <hr>
+                    <button type="button" onclick="UserInputDataForm()">User Inputs</button> 
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="Tbalance" class="popup-form">
+                <h2 class="form-title">Your Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Customers For All Transactions :</h3>
+                <h2 id="tot3"><%= TotalTCostumers%></h2>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h2 id="tot2">GHC <%= TTotalcPcash%></h2> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h2 id="tot2">GHC <%= ActualWAmount%></h2>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h2 id="tot1">GHC <%= TotalTBalance%></h2>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="Mpayment-form" class="popup-form">
+                <h2 class="form-title">MoMo Payment Form</h2>
+                <form id="momoPaymentForm" action="/Usermpayment" method="post">
+                    <label for="Mpayment-type">MoMo Type:</label>
+                    <select id="momo" name="MoMo" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="mtn">MTN (MoMo)</option>
+                        <option value="Voda">Vodafone (MoMo)</option>
+                    </select>
+                    <label for="description-type">Description Type:</label>
+                    <select id="description-type-momo" name="description" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdrawal">Withdrawal</option>
+                    </select>
+                    <label for="momo-numb">Slip Number:</label>
+                    <input type="text" name="momonumber" placeholder="Enter Slip Number Here" required>
+                    <label for="name">Name of Beneficial:</label>
+                    <input type="text" name="Bname" placeholder="Enter Name Here" required>
+                    <label for="amount">Amount in Number(s):</label>
+                    <input type="number" step="ANY" name="amount" placeholder="Enter Amount Here" required>
+                    <label for="description-type" id="cd1">Did you take any commission,Yes/No ?:</label>
+                    <select id="comm-description-momo" name="commDescMm" required>
+                        <option value="none" disabled selected hidden>Select An Option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Null" style="display: none;">Null</option>
+                    </select>
+                    <label for="name" id="lr1">State the reason if you did not collect any commission:</label>
+                    <input type="text" name="R1name" id="r1" placeholder="Enter Your Reason" required>
+                    <label for="amount" id="cml1">Commission:</label>
+                    <input type="number" step="ANY" name="Commission" id="comm-momo" placeholder="Enter Commission Here" required>
+                    <p id="errorSms1" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="showMoMoConfirmationForm()">Preview Inputs</button>
+                    <hr>
+                    <button type="button" onclick="MomoBack()">Back</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmation-form5" class="popup-form">
+                <h2 class="form-title">Confirm Your MoMo Transaction</h2>
+                <p class="con-txt">Type: <span id="confirm-momo-type" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Description Type: <span id="confirm-momo-description" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Slip Number: <span id="confirm-momo-number" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Name of Beneficial: <span id="confirm-momo-name" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Amount: <span id="confirm-momo-amount" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Commission description: <span id="conf-mm-comm-desc" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Commission reason: <span id="conf-mm-comm-rsn" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <p class="con-txt">Commission: <span id="confirm-momo-commission" class="notes" style="text-decoration: underline;"></span></p>
+                <hr>
+                <button type="button" onclick="submitMoMoPaymentForm()">Confirm and Submit</button>
+                <hr>
+                <button type="button" onclick="Back5()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div> 
+            <div id="Withdrawal-dashbd" >
+                <h2 class="form-title">Withdrawal Dashboard</h2>
+                <div class="sub-momo">
+                    <p class="tot"> MTN-MOMO-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= Wcount%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= MoMoWithdrawalAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-fidel">
+                    <p class="tot"> SUSU-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= countsusuWd%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= SusuWithdrawalAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-container">
+                    <p class="tot"> ECOBANK-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= countEw%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= EcobankWithdrawalAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-cal">
+                    <p class="tot"> G-MONEY-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= Gcount%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= GMoneyAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-momo">
+                    <p class="tot">ATM-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= AMTcount%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= ATMAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-fidel">
+                    <p class="tot"> VODA-CASH-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= countvw%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= VodawithdrawalAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-container">
+                    <p class="tot"> E-ZWICH-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= countz%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= EzwichAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-cal">
+                    <p class="tot"> REMITTANCES-SECTION </p>
+                    <div class="card-disp">
+                        <h1>Today's Customers</h1>
+                        <h2><%= countR%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Amount Withdrew</h1>
+                        <h2>GHC <%= RemittAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-total1">
+                    <p class="tot">OUTPUTS</p>
+                    <div class="card-disp">
+                        <h1>Today's Total Customers</h1>
+                        <h2><%= TotalWCostumers%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Total Amount Withdrew</h1>
+                        <h2>GHC <%= TotalWAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-total1">
+                    <p class="tot">OUTPUTS</p>
+                    <div class="card-disp">
+                        <h1>Cash To Bank</h1>
+                        <h2>GHC <%= LoadingAmount%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Commission</h1>
+                        <h2>GHC <%= finalCommssAmount%></h2>
+                    </div>
+                </div>
+                <div class="sub-total1">
+                    <p class="tot">OUTPUTS</p>
+                    <div class="card-disp">
+                        <h1>Expenses</h1>
+                        <h2>GHC <%= ExpensesAmount%></h2>
+                    </div>
+                    <div class="card-disp">
+                        <h1>Physical Cash Remaining</h1>
+                        <h2>GHC <%= RemainPCash%></h2>
+                    </div>
+                </div>
+                <div class="sub-total2">
+                    <p class="tot">OVERALL WITHDRAWALS</p>
+                    <div class="card-disp1">
+                        <h1>Actual Amount Withdrew</h1>
+                        <h2>GHC <%= ActualWAmount%></h2>
+                    </div>
+                </div> 
+                <button type="button" onclick="hideForm2()">Close</button>
+            </div>
+            <span id="loading" class="loader"></span>
+            <div id="failure-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-wrong.gif" >
+                    <div>The Record is not Saved Due to an Error, Please Try Again !</div>
+                </div>
+            </div>
+            <div id="successful-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/Animation-check-new.gif">
+                    <div id="success-txt">The Record is successfully Saved!</div>
+                </div>
+            </div>
+        
+            <!--calculator code-->
+            <div id="help-form" class="popup-form">
+                <h2>Calculator</h2>
+                <hr>
+                
+                <!---calculator begin-->
+                <div class="calculator">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Note</th>
+                                <th>Count</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GHS 200</td>
+                                <td><input type="number" id="note200" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total200">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 100</td>
+                                <td><input type="number" id="note100" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total100">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 50</td>
+                                <td><input type="number" id="note50" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total50">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 20</td>
+                                <td><input type="number" id="note20" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total20">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 10</td>
+                                <td><input type="number" id="note10" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total10">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 5</td>
+                                <td><input type="number" id="note5" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total5">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 2</td>
+                                <td><input type="number" id="note2" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total2">0</td>
+                            </tr>
+                            <tr>
+                                <td>GHS 1</td>
+                                <td><input type="number" id="note1" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="total1">0</td>
+                            </tr>
+                            <tr>
+                                <td>Gp 50</td>
+                                <td><input type="number" id="coin50" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="totalCoin50">0</td>
+                            </tr>
+                            <tr>
+                                <td>Gp 20</td>
+                                <td><input type="number" id="coin20" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="totalCoin20">0</td>
+                            </tr>
+                            <tr>
+                                <td>Gp 10</td>
+                                <td><input type="number" id="coin10" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                                <td id="totalCoin10">0</td>
+                            </tr>
+                            <tr class="grand-total">
+                                <td>Total</td>
+                                <td colspan="2">
+                                    <span id="grandTotal" onclick="copyGrandTotal()" style="cursor: pointer;">GHS 0</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn" onclick="clearInputs()">Clear</button>
+                </div>
+        
+                <!---calculator ending-->
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>  
+
+        </div>
+
+    </div>
+    <script src="src/user.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+    <script src="src/user2.js"></script>
+</body>

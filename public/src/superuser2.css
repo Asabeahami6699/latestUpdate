@@ -1,0 +1,553 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    background-color: rgb(176, 176, 176);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#Top-bar {
+    position: fixed;
+    top: 0;
+    height: 70px;
+    width: 100%;
+    background: rgb(41, 28, 110);
+    padding: 10px 0;
+    color: #fff;
+    z-index: 1000;
+    border: 2px; 
+}
+
+.Main {
+    height: calc(100% - 70px);
+    width: 100%;
+    padding-top: 90px;
+    background-color: rgb(176, 176, 176);
+}
+
+#consists {
+    display: flex;
+    justify-content: space-around;
+}
+
+#consists li,a {
+    list-style: none;
+    text-align: center;
+    margin-top: 8px;
+    padding: 5px;
+    font-size: large;
+    font-family: Tahoma,  Verdana ;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.b1-btn{
+    list-style: none;
+    font-size: large;
+    font-family: Tahoma,  Verdana ;
+    color: white;
+    background-color: rgb(41, 28, 110);
+    border: none;
+}
+
+.b1-btn:hover{
+    background-color: rgb(29, 161, 242);
+    color: black;
+    cursor: pointer; 
+    border-radius: 5px;
+}
+
+#consists li:hover{
+    background-color: rgb(29, 161, 242);
+    color: black;
+    cursor: pointer; 
+    transform: scale(1.5s);
+    transition: background-color 0.2s;
+    border-radius: 25px;
+    border: 2px solid whitesmoke;
+}
+
+#consists a:hover{
+    background-color: rgb(29, 161, 242);
+    color: black;
+    cursor: pointer; 
+    transform: scale(1.5s);
+    transition: background-color 0.2s;
+    border-radius: 25px;
+    border: 2px solid whitesmoke;
+}
+
+#consists div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tot {
+    text-align: center;
+    font-weight: bolder;
+    background-color: black;
+    color: whitesmoke;
+    padding: 8px;
+}
+
+.sub-total2{
+    width: calc(25% - 10px); 
+    height: calc(80% - 30px); 
+    margin: 5px; 
+    float: left; 
+    background-color: rgba(255, 255, 255, 0.871);
+    box-sizing: border-box; 
+    border: 2px solid black; 
+    overflow: hidden;
+    margin-top: 2%;
+    border-radius: 5px;
+}
+
+.sub-total1{
+    width: calc(25% - 10px); 
+    height: calc(80% - 30px); 
+    margin: 5px; 
+    float: left; 
+    background-color: rgba(255, 255, 255, 0.871);
+    box-sizing: border-box; 
+    border: 2px solid black; 
+    overflow: hidden;
+    margin-top: 2%;
+    border-radius: 5px;
+    margin-bottom: 2%;
+}
+
+.sub-fidel{
+    width: calc(25% - 10px); 
+    height: calc(80% - 30px);  
+    margin: 5px; 
+    float: left; 
+    background-color: rgba(255, 255, 255, 0.871);
+    box-sizing: border-box; 
+    border: 2px solid #000; 
+    overflow: hidden;
+    margin-top: 2%;
+    border-radius: 5px;
+    margin-bottom: 2%;
+
+}
+
+.card-disp {
+    width: calc(95% - 1px);
+    height: calc(90% - 105px);
+    margin: 5px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000; 
+}
+
+.card-disp1 {
+    width: calc(95% - 1px);
+    height: calc(90% - 60px);
+    margin: 5px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000; 
+}
+
+.card-disp h1,
+.card-disp h2 {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: medium;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.card-disp1 h1,
+.card-disp1 h2 {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: medium;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.tell-disp{
+    text-align: center;
+    font-size: larger;
+    color: black;
+    font-weight: bolder;
+    padding: 5px;
+    background-color: rgba(245, 245, 245, 0.522);
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.tell-disp1{
+    text-align: center;
+    font-size: larger;
+    color: rgb(41, 28, 110);
+    font-weight: bolder;
+    padding: 5px;
+    margin-top: 10px; 
+}
+
+.teller-section{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center;
+    background-color: rgb(161, 161, 161);
+    
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.popup-form form {
+  width: 80%; 
+  max-width: 400px; 
+  margin: auto;
+}
+
+
+.form1{
+    max-width: 850px; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.form-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #007BFF;
+}
+
+.popup-form h3{
+    text-align: center;
+    margin: 10px;
+}
+
+.formxx h3{
+    text-align: center;
+    margin: 10px;
+}
+
+.formxx button{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.formxx button {
+    background-color: rgb(66, 66, 66);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+
+.formxx button:hover {
+    background-color: rgb(29, 161, 242);
+    border-radius: 25px;
+    color: black;
+}
+
+.formxx {
+    display: none;
+    background-color: #ffffffe4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    width: auto;
+    margin: 5px;
+    max-height: 570px;
+    min-width: 400px;
+    overflow-y: auto;  
+}
+
+.formxx p{
+    text-align: center;
+}
+
+.formxx:hover {
+    background-color: rgb(184, 184, 184);
+    transition: background-color 0.7s ease;
+}
+
+.popup-form label {
+    display: block;
+    margin: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.popup-form select,
+.popup-form button, 
+.popup-form input{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  font-size: medium;
+}
+
+.popup-form button {
+  background-color: rgb(66, 66, 66);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+.popup-form button:hover {
+  background-color: rgb(29, 161, 242);
+  border-radius: 25px;
+  color: black;
+}
+
+input, select {
+    padding: 8px;
+    border: 2px solid rgb(71, 71, 71);
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}
+    
+.popup-form {
+    display: none;
+    background-color: #ffffffe4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    width: auto;
+    margin: 5px;
+    max-height: 570px;
+    min-width: 300px;
+    max-width: 400px;
+    overflow-y: auto;   
+}
+
+.popup-form p{
+    text-align: center;
+}
+
+.popup-form:hover {
+    background-color: rgb(184, 184, 184);
+    transition: background-color 0.7s ease;
+}
+
+.tot1{
+    text-align: center;
+    font-weight: bolder;
+    padding: 15px; 
+    border: 3px solid black; 
+    color: whitesmoke; 
+    background-color: green;
+    border-radius: 25px;
+    margin-bottom: 30px;
+}
+
+.tot2{
+    text-align: center;
+    font-weight: bolder;
+    padding: 15px; 
+    border: 3px solid black; 
+    color: whitesmoke; 
+    background-color: rgb(225, 0, 0);
+    border-radius: 25px;
+    margin-bottom: 3px;
+}
+
+.tot3{
+    text-align: center;
+    font-weight: bolder;
+    padding: 15px; 
+    border: 3px solid black; 
+    color: whitesmoke; 
+    background-color: goldenrod;
+    border-radius: 25px;
+    margin-bottom: 3px;
+}
+
+.tot4 {
+    text-align: center;
+    font-weight: bolder; 
+    margin: 5px;
+}
+
+.tot5{
+    text-align: center;
+    font-weight: bolder; 
+    font-size: xx-large;
+    margin: 10px;
+    color: rgb(0, 0, 195); 
+}
+
+.text1{
+    font-size: medium;
+    color: black;
+    margin: 5px;
+}
+
+.vip{
+    padding: 15px;
+    font-size: large; 
+    margin: 10px;
+    background-color: green;
+    color: whitesmoke;
+    border: 3px solid black;
+    border-radius: 20px;
+
+}
+
+#T-right{
+    float: right;
+    width: 40%;
+    margin: 1%;
+    background-color: rgb(176, 176, 176);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.final-table{
+    background-color: rgb(176, 176, 176);
+}
+
+#T-left{
+    float: left;
+    width: 40%;
+    margin: 1%;
+    background-color: rgb(176, 176, 176);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#topmost-items{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+
+.Obanks-card{
+    height: 70px;
+    width: 40%;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    margin: 1%;
+    border: 2px solid black;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.Obanks-card p{
+    margin: 10px;
+}
+
+.Obanks-card:hover{
+    color: black;
+    background-color: rgb(29, 161, 242);
+    transform: scale(2s);
+    transition: background-color 0.6s ease;
+}
+
+.mid-text{
+    width: 100%;
+    height: 80px;
+    background: rgb(41, 28, 110);
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: whitesmoke;
+}
+
+tr:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+tr:hover {
+    background-color: rgba(0, 101, 0, 0.543);
+    transform: scale(1.5s);
+    
+}
+
+#pink{
+    float: right;
+    width: 40%;
+    margin: 1%;
+    height: 50px;
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 10px;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#pink:hover{
+    background-color: rgb(29, 161, 242);
+    color: black;
+    cursor: pointer;
+    border-radius: 20px;
+    transform: scale(1.5s);
+    transition: background-color 0.6s ease;
+}
+
+
+

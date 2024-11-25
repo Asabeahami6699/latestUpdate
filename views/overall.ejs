@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company's Overall Balancing</title>
+    <script src="https://kit.fontawesome.com/25ed6cac66.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/overall.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+   
+</head>
+<body>
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <div class="profile-name"><%= name %> ▼</div>
+    </div>    
+   
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="close-btn" id="close-btn"><i class="fa-regular fa-circle-xmark"></i></div>
+            <div class="sidebar-content" onclick="showPopups('accntBlnForm')"><i class="fa fa-file-invoice-dollar"></i>Account Balances </div> 
+            <div class="sidebar-content" onclick="showPopups('unsettledForm')"><i class="fa fa-hourglass"></i>Unsettled Balances</div>
+            <div class="sidebar-content" onclick="showPopups('pcashForm')"><i class="fa fa-money-check-dollar"></i>Physical Cash</div>
+            <div class="sidebar-content" onclick="showPopups('pendingForm')"><i class="fa fa-solid fa-clock"></i>Pending / Reversal / Repayment Transaction</div>
+            <div class="sidebar-content" onclick="showPopups('givenOutForm')"><i class="fa fa-hand-holding-heart"></i>Given-Out / Personal Expenses</div>
+            <div class="sidebar-content" onclick="showPopups('expComForm')"><i class="fa fa-money-bill-wave"></i>Expenses / Commission</div>
+            <div class="sidebar-content" onclick="showPopups('susuForm')"><i class="fa-solid fa-building-columns"></i>SuSu Savings</div>
+            <div class="sidebar-content" >
+                <a href="/Deposits" class="gbbtn" ><i class="fa-solid fa-money-bill-transfer"></i>Tellers Deposit Page</a>
+            </div>
+            <div class="sidebar-content" >
+                <a href="/Withdrawals" class="gbbtn" ><i class="fa-solid fa-money-bill-transfer"></i>Tellers Withdrawal Page</a>
+            </div>
+            <div class="sidebar-content" >
+                <a href="#" id="gbbtn" class="back-to-page"><i class="fa-solid fa-backward"></i>Go Back</a>
+            </div>
+            <button class="sidebar-content" type="button" onclick="showPopups('overallDeltForm')">Deletion</button>
+            <button class="sidebar-content" type="button" onclick="showPopups('overallDlForm')">Download Documents</button>
+            <form action="/logout?_method=DELETE" method="POST">
+                <button class="sidebar-content" type="submit">Log Out</button>
+            </form>
+        </div>
+        
+        <div class="main-content" id="main-content">
+            <div class="hamburger" id="hamburger">☰ <span style="font-size: 16px;">menu</span></div>
+
+            <div id="overlay">
+                <div class="popup" id="accntBlnForm">
+                    <h4>Account Balance Form</h4>
+                    <hr>
+                    <p id="errorSmsBalance" class="error" style="display:none;">Please all field are required!!</p>
+                    <form id="balanceForm">
+                        <label for="accountTypeBalance">Account Type: <span style="color: red;">*</span></label>
+                        <select id="accountTypeBalance" class="input-field" name="AB-slt" required>
+                            <option value="" disabled selected hidden>Select Account Type</option>
+                            <option value="Ecobank">Ecobank</option>
+                            <option value="Opening Balance">Opening Balance</option>
+                            <option value="MoMo/Voda">MoMo/Voda</option>
+                            <option value="Other Bank">Other Bank</option>
+                        </select>
+                        <label for="accountDescriptionBalance">Account Description: <span style="color: red;">*</span></label>
+                        <select id="accountDescriptionBalance" class="input-field" name="Description" required>
+                            <option value="" disabled selected hidden>Select Account Description</option>
+                        </select>
+                        <label for="balanceAmountInput">Balance Amount GHC: <span style="color: red;">*</span></label>
+                        <input type="number" id="balanceAmountInput" class="input-field" name="amount" required />
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('accntBlnForm')">Close</button>
+                            <button type="button"  onclick="confirmForm1()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="previewFormBalance">
+                    <h4>Preview Account Balance</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Account Type:</strong> <span id="previewAccountTypeBalance"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Account Description:</strong> <span id="previewAccountDescriptionBalance"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Balance Amount GHC:</strong> <span id="previewBalanceAmountBalance"></span></p>
+                    <hr>
+                    <div class="loader" id="loading1">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('previewFormBalance', 'accntBlnForm')">Back</button>
+                        <button  onclick="submitForm1()">Submit</button>
+                    </div>
+                </div>
+
+                <!-- Unsettled Balances Popup Form -->
+                <div class="popup" id="unsettledForm">
+                    <h4>Unsettled Balances Form</h4>
+                    <hr>
+                    <p id="errorSmsUnsettled" class="error" style="display:none;">Please all field are required!!</p>
+                    <form id="Form2">
+                        <label for="branchUnsettled">Branch: <span style="color: red;">*</span></label>
+                        <select id="branchUnsettled" name="branch" required>
+                            <option value="" disabled selected hidden>Select Branch</option>
+                            <option value="AIYINASI">AIYINASI</option>
+                            <option value="BOGOSO">BOGOSO</option>
+                            <option value="PRESTEA">PRESTEA</option>
+                        </select>
+                        <label for="transactionTypeUnsettled">Transaction Type: <span style="color: red;">*</span></label>
+                        <select id="transactionTypeUnsettled" name="UB-slt" required>
+                            <option value="" disabled selected hidden>Select Transaction Type</option>
+                            <option value="unsettled remittance">Unsettled Remittance</option>
+                            <option value="unsettled ezwich">Unsettled Ezwich</option>
+                            <option value="unsettled atm">Unsettled ATM</option>
+                        </select>
+                        <label for="amountUnsettled">Amount: <span style="color: red;">*</span></label>
+                        <input type="number" id="amountUnsettled" name="amount" required />
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('unsettledForm')">Close</button>
+                            <button type="button"  onclick="confirmForm2()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="unsettledPreview" >
+                    <h4>Preview Unsettled Balances</h4>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Branch:</strong> <span id="previewBranchUnsettled"></span>
+                    </p>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Transaction Type:</strong> <span id="previewTransactionTypeUnsettled"></span>
+                    </p>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Amount GHC:</strong> <span id="previewAmountUnsettled"></span>
+                    </p>
+                    <hr>
+                    <div class="loader" >
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span>
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('unsettledPreview', 'unsettledForm')">Back</button>
+                        <button  onclick="submitForm2()">Submit</button>
+                    </div>
+                </div>
+
+                <!-- PCash Form Popup -->
+                <div class="popup" id="pcashForm">
+                    <h4>PCash Form</h4>
+                    <hr>
+                    <p id="errorSmsPcash" class="error" style="display:none;">Please all field are required!!</p>
+                    <form id="pcashFormDetails">
+                        <label for="branchPcash">Branch: <span style="color: red;">*</span></label>
+                        <select id="branchPcash" name="branch" required>
+                            <option value="" disabled selected hidden>Select Branch</option>
+                            <option value="AIYINASI">AIYINASI</option>
+                            <option value="BOGOSO">BOGOSO</option>
+                            <option value="PRESTEA">PRESTEA</option>
+                            <option value="OTHER">OTHER</option>
+                            <option value="SUSU VAULT PREVIOUS">SUSU VAULT PREVIOUS</option>
+                            <option value="PREVIOUS">PREVIOUS</option>
+                        </select>
+                        <label for="amountPcash">Amount GHC: <span style="color: red;">*</span></label>
+                        <input type="number" id="amountPcash" name="amount" required />
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('pcashForm')">Close</button>
+                            <button type="button"  onclick="confirmForm3()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="pcashPreview">
+                    <h4>Preview PCash</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Branch:</strong> <span id="previewBranchPcash"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Amount GHC:</strong> <span id="previewAmountPcash"></span></p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('pcashPreview', 'pcashForm')">Back</button>
+                        <button  onclick="submitForm3()">Submit</button>
+                    </div>
+                </div>
+
+                <!-- Pending Transactions Form Popup -->
+                <div class="popup" id="pendingForm">
+                    <h4>Transactions Form</h4>
+                    <hr>
+                    <p id="errorSmsPending" class="error" style="display:none;">Please all field are required!!</p>
+                    <form id="pendingFormDetails">
+                        <label for="transactionTypePending">Transaction Type: <span style="color: red;">*</span></label>
+                        <select id="transactionTypePending" name="PT-slt" required>
+                            <option value="" disabled selected hidden>Select Transaction Type</option>
+                            <option value="pending transaction">Pending Transaction</option>
+                            <option value="reversal">Reversal</option>
+                            <option value="repayment">Repayment</option>
+                        </select>
+                        <label for="descriptionPending">Description: <span style="color: red;">*</span></label>
+                        <input type="text" id="descriptionPending" name="Description" required />
+                        <label for="amountPending">Amount GHC: <span style="color: red;">*</span></label>
+                        <input type="number" id="amountPending" name="amount" required />
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('pendingForm')">Close</button>
+                            <button type="button"  onclick="confirmForm4()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="pendingPreview" >
+                    <h4>Preview Pending Transactions</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Transaction Type:</strong> <span id="previewTransactionTypePending"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Description:</strong> <span id="previewDescriptionPending"></span></p>
+                    <hr class="pre-text">
+                    <p class="pre-text"><strong>Amount GHC:</strong> <span id="previewAmountPending"></span></p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('pendingPreview', 'pendingForm')">Back</button>
+                        <button  onclick="submitForm4()">Submit</button>
+                    </div>
+                </div>
+
+                <!-- Given-Out/Personal Expense popup -->
+                <div class="popup" id="givenOutForm">
+                    <h4>Given-Out/Personal Expenses Form</h4>
+                    <hr>
+                    <p id="errorSmsGivenOutTransaction" class="error" style="display:none;">
+                        Please fill in all fields!
+                    </p>
+                    <form id="givenoutTransactionForm">
+                        <label for="givenoutTransactionType">
+                            Transaction Type: <span style="color: red;">*</span>
+                        </label>
+                        <select id="givenoutTransactionType" name="GOP-slt" required>
+                            <option value="" disabled selected hidden>Select Transaction Type</option>
+                            <option value="Given Out">Given Out</option>
+                            <option value="Personal Expenses">Personal Expenses</option>
+                        </select>
+                        <label for="givenoutDescriptionTransaction">
+                            Description: <span style="color: red;">*</span>
+                        </label>
+                        <input type="text" id="givenoutDescriptionTransaction" name="Description" required />
+
+                        <label for="givenoutAmountTransaction">
+                            Amount GHC: <span style="color: red;">*</span>
+                        </label>
+                        <input type="number" id="givenoutAmountTransaction" name="amount" required />
+
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('givenOutForm')">
+                                Close
+                            </button>
+                            <button type="button"  onclick="confirmForm5()">
+                                Preview
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="givenOutPreview">
+                    <h4>Preview Given-Out/Personal Expenses</h4>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Transaction Type:</strong> 
+                        <span id="previewGivenOutTransactionType"></span>
+                    </p>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Description:</strong> 
+                        <span id="previewGivenOutDescriptionTransaction"></span>
+                    </p>
+                    <hr>
+                    <p class="pre-text">
+                        <strong>Amount GHC:</strong> 
+                        <span id="previewGivenOutAmountTransaction"></span>
+                    </p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('givenOutPreview', 'givenOutForm')">
+                            Back
+                        </button>
+                        <button  onclick="submitForm5()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expenses & Commission Transactions Form Popup -->
+                <div class="popup" id="expComForm">
+                   <h4>Expenses & Commission Form</h4>
+                   <hr>
+                   <p id="errorSmsExpCom" class="error" style="display:none;">Please all fields are required!!</p>
+                   <form id="expComFormDetails">
+                        <label for="transactionType">Select Expenses or Commission: <span style="color: red;">*</span></label>
+                        <select id="Exps/Comm" name="EC-slt" required>
+                           <option value="" disabled selected hidden>Select An Option</option>
+                           <option value="Expenses">Expenses</option>
+                           <option value="Commission">Commission</option>
+                        </select>
+                    
+                        <label for="descriptionExpCom">Description / Personnel: <span style="color: red;">*</span></label>
+                        <select id="descriptionExpCom" name="Description" required>
+                            <option value="" disabled selected hidden>Select Description</option>
+                        </select>
+                        <label for="amountExpCom">Amount GHC: <span style="color: red;">*</span></label>
+                        <input type="number" id="amountExpCom" name="amount" required />
+                    
+                        <div class="buttonContainer">
+                            <button type="button" id="closeExpCom" onclick="hideForms('expComForm')">Close</button>
+                            <button type="button" id="previewButtonExpCom" onclick="confirmForm6()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="expComPreview">
+                    <h4>Preview Expenses & Commission</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Transaction Type:</strong> <span id="previewtransactiontypeExpCom"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Description:</strong> <span id="previewDescriptionExpCom"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Amount GHC:</strong> <span id="previewAmountExpCom"></span></p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('expComPreview', 'expComForm')">Back</button>
+                        <button  onclick="submitForm6()">Submit</button>
+                    </div>
+                </div>
+
+                <!-- SUSU Transactions Form Popup -->
+                <div class="popup" id="susuForm">
+                    <h4>SUSU Transactions Form</h4>
+                    <hr>
+                    <p id="errorSmsSusu" class="error" style="display:none;">Please all field are required!!</p>
+                    <form id="susuFormDetails">
+                        <label for="branchSusu">Branch: <span style="color: red;">*</span></label>
+                        <select id="branchSusu" name="ST-slt" required>
+                            <option value="" disabled selected hidden>Select Branch</option>
+                            <option value="MXP BOGOSO">Mxp Bogoso</option>
+                            <option value="LUTECH AIYINASI">Lutech Aiyinasi</option>
+                            <option value="SUSU PRESTEA">Susu Prestea</option>
+                        </select>
+                        <label for="descriptionSusu">Description: <span style="color: red;">*</span></label>
+                        <select id="descriptionSusu" name="Description" required>
+                            <option value="" disabled selected hidden>Select Description</option>
+                            <option value="CREDIT">Credit</option>
+                            <option value="WALKING">Walking</option>
+                            <option value="MOBILISERS">Mobilizers</option>
+                            <option value="WITHDRAWALS">Withdrawals</option>
+                        </select>
+                        <label for="amountSusu">Amount GHC: <span style="color: red;">*</span></label>
+                        <input type="number" id="amountSusu" name="amount" required />
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('susuForm')">Close</button>
+                            <button type="button"  onclick="confirmForm7()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="susuPreview">
+                    <h4>Preview SUSU Transactions</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Branch:</strong> <span id="previewBranchSusu"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Description:</strong> <span id="previewDescriptionSusu"></span></p>
+                    <hr>
+                    <p class="pre-text"><strong>Amount GHC:</strong> <span id="previewAmountSusu"></span></p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('susuPreview', 'susuForm')">Back</button>
+                        <button  onclick="submitForm7()">Submit</button>
+                    </div>
+                </div>
+
+                <div class="popup" id="overallDlForm">
+                    <h4>Transactions Download Form</h4>
+                    <hr>
+                    <form action="/overallDownload" method="post">
+                        <label for="start-date">Start Date: <span style="color: red;">*</span></label>
+                        <input type="date" id="start-date" name="ovrll-start-date" value="YYYY-MM-DD" required>
+                        <label for="end-date">End Date: <span style="color: red;">*</span></label>
+                        <input type="date" id="end-date" name="ovrll-end-date" value="YYYY-MM-DD" required>  
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('overallDlForm')">Close</button>
+                            <button type="submit">Download</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="overallDeltForm">
+                    <h4>Transaction Deletion Form</h4>
+                    <hr>
+                    <form id="deltFormDetails">
+                        <p id="errorSmsDelt" class="error" style="display:none;">Please fill the field!!</p>
+                        <label for="amountSusu">Enter Transaction ID: <span style="color: red;">*</span></label>
+                        <input type="text" id="transDelt" name="deletion1" required />  
+                        <div class="buttonContainer">
+                            <button type="button"  onclick="hideForms('overallDeltForm')">Close</button>
+                            <button type="button"  onclick="deltDocs()">Preview</button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+
+                <div class="popup" id="overallDeltPreview">
+                    <h4>Preview Transaction (ID) To Delete</h4>
+                    <hr>
+                    <p class="pre-text"><strong>Transaction ID:</strong> <span id="previewtransactionID"></span></p>
+                    <hr>
+                    <div class="loader" id="loading">
+                        <div class="color-bar color-bar1"></div>
+                        <div class="color-bar color-bar2"></div>
+                        <div class="color-bar color-bar3"></div>
+                        <span class="loading-text">Loading...</span> 
+                    </div>
+                    <div class="buttonContainer">
+                        <button  onclick="backToForm('overallDeltPreview', 'overallDeltForm')">Back</button>
+                        <button  onclick="submitFormDelt()">Submit</button>
+                    </div>
+                </div>
+
+                <div class="pixal" id="failure-sms">
+                    <div>
+                        <img src="imgs and icons/icons8-wrong.gif" >
+                        <div>Error Occurred While Processing Request, Please Try Again !</div>
+                    </div>
+                </div>
+
+                <div id="successful-sms" class="pixal">
+                    <div>
+                        <img src="imgs and icons/Animation-check-new.gif">
+                        <div>The Record Is Successfully Saved !</div>
+                    </div>
+                </div>
+    
+                <div id="successD-sms-delS" class="pixal">
+                    <div>
+                        <img src="imgs and icons/Animation-Trash-2.gif">
+                        <div>Document Is Deleted Successfully</div>
+                    </div>
+                </div>
+
+                <div id="failure-sms-delE" class="pixal">
+                    <div>
+                        <img src="imgs and icons/icons8-error.gif" >
+                        <div>Document Does Not Exist !</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--trial table for expansion-->
+           <div class="container-table">
+                
+            <table>
+                <caption>Account Balancing</caption>
+                <thead>
+                    <tr>
+                        <th>DESCRIPTION</th>
+                        <th>OPENING BALANCE</th>
+                        <th>CLOSING BALANCE</th>
+                        <th>OVERAGE</th>
+                        <th>SHORTAGE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Tablestotals">
+                        <td>AMOUNT</td>
+                        <td><%= openingBalance %></td>
+                        <td><%= finalClosingBln %></td>
+                        <td><%= overage %></td>
+                        <td><%= shortage %></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+    
+            <!--Ecobank PlatformTable goes here--->
+            <table>
+                <caption>Ecobank Platform</caption>
+                <thead>
+                    <tr>
+                        <th>Account Type</th>
+                        <th>54. ACCOUNT</th>
+                        <th>20. ACCOUNT</th>
+                        <th>10. ACCOUNT</th>
+                        <th>80. ACCOUNT</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Tablestotals">
+                        <td>Balance</td>
+                        <td><%= accountSummary["54. ACCOUNT"] %></td>
+                        <td><%= accountSummary["20. ACCOUNT"] %></td>
+                        <td><%= accountSummary["10. ACCOUNT"] %></td>
+                        <td><%= accountSummary["80. ACCOUNT"] %></td>
+                        <td><%= accountSummary.accountTotal %></td>
+                    </tr>
+                </tbody>
+            </table>            
+
+            <!-- Momo Acct/Voda Table -->
+            <table>
+                <caption>Momo Acct/Voda</caption>
+                <thead>
+                    <tr>
+                        <th>Account Type</th>
+                        <th>MTN</th>
+                        <th>VODA</th>
+                        <th>SUSU MOMO</th>
+                        <th>MOMO</th>
+                        <th>G.MONEY</th>
+                        <th>ZEEPAY</th>
+                        <th>0243028644</th>
+                        <th>Total Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Tablestotals">
+                        <td>Balance</td>
+                        <td><%= momoAccountSummary["MTN"] %></td>
+                        <td><%= momoAccountSummary["VODA"] %></td>
+                        <td><%= momoAccountSummary["SUSU MOMO"] %></td>
+                        <td><%= momoAccountSummary["MOMO"] %></td>
+                        <td><%= momoAccountSummary["G.MONEY"] %></td>
+                        <td><%= momoAccountSummary["ZEEPAY"] %></td>
+                        <td><%= momoAccountSummary["0243028644"] %></td>
+                        <td><%= momoAccountSummary.totalBalance %></td>
+                    </tr>
+                </tbody>
+            </table>                        
+
+            <!-- Other Bank Account Balances Table -->
+            <table>
+                <caption>Other Bank Account Balances</caption>
+                <thead>
+                    <tr>
+                        <th>Bank Account</th>
+                        <th>CALBANK</th>
+                        <th>FIDELITY 1</th>
+                        <th>FIDELITY 2</th>
+                        <th>GCB</th>
+                        <th>91 ACCOUNT</th>
+                        <th>CALBANK FLOAT</th>
+                        <th>WITHDRAWALS</th>
+                        <th>Total Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Tablestotals">
+                        <td>Balance</td>
+                        <td><%= otherBankAccountSummary["CALBANK"] %></td>
+                        <td><%= otherBankAccountSummary["FIDELITY 1"] %></td>
+                        <td><%= otherBankAccountSummary["FIDELITY 2"] %></td>
+                        <td><%= otherBankAccountSummary["GCB"] %></td>
+                        <td><%= otherBankAccountSummary["91 ACCOUNT"] %></td>
+                        <td><%= otherBankAccountSummary["CALBANK FLOAT"] %></td>
+                        <td><%= otherBankAccountSummary["WITHDRAWALS"] %></td>
+                        <td><%= otherBankAccountSummary.totalBalance %></td>
+                    </tr>
+                </tbody>
+            </table>            
+
+            <table>
+                <caption>Unsettled Transactions</caption>
+                <thead>
+                    <tr>
+                        <th>Transaction Type</th>
+                        <th>AIYINASI</th>
+                        <th>BOGOSO</th>
+                        <th>PRESTEA</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Unsettled Remittance</td> 
+                        <td><%= unsettledSummary["unsettled remittance"].AIYINASI %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].BOGOSO %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].PRESTEA %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].total %></td>
+                    </tr>
+                    <tr>
+                        <td>Unsettled Ezwich</td> 
+                        <td><%= unsettledSummary["unsettled ezwich"].AIYINASI %></td>
+                        <td><%= unsettledSummary["unsettled ezwich"].BOGOSO %></td>
+                        <td><%= unsettledSummary["unsettled ezwich"].PRESTEA %></td>
+                        <td><%= unsettledSummary["unsettled ezwich"].total %></td>
+                    </tr>
+                    <tr>
+                        <td>Unsettled ATM</td> 
+                        <td><%= unsettledSummary["unsettled atm"].AIYINASI %></td>
+                        <td><%= unsettledSummary["unsettled atm"].BOGOSO %></td>
+                        <td><%= unsettledSummary["unsettled atm"].PRESTEA %></td>
+                        <td><%= unsettledSummary["unsettled atm"].total %></td>
+                    </tr>
+                    <tr class="Tablestotals">
+                        <td>Total Unsettled Transactions</td>
+                        <td><%= unsettledSummary["unsettled remittance"].AIYINASI + unsettledSummary["unsettled ezwich"].AIYINASI + unsettledSummary["unsettled atm"].AIYINASI %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].BOGOSO + unsettledSummary["unsettled ezwich"].BOGOSO + unsettledSummary["unsettled atm"].BOGOSO %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].PRESTEA + unsettledSummary["unsettled ezwich"].PRESTEA + unsettledSummary["unsettled atm"].PRESTEA %></td>
+                        <td><%= unsettledSummary["unsettled remittance"].total + unsettledSummary["unsettled ezwich"].total + unsettledSummary["unsettled atm"].total %></td>
+                    </tr>
+                </tbody>
+            </table>            
+
+         <!-- Physical Cash Table -->
+         <table>
+            <caption>Physical Cash</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>AIYINASI</th>
+                    <th>BOGOSO</th>
+                    <th>PRESTEA</th>
+                    <th>OTHER</th>
+                    <th>PREVIOUS</th>
+                    <th>SUSU</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Tablestotals">
+                    <td>Amount</td>
+                    <td><%= physicalCashSummary["AIYINASI"] %></td>
+                    <td><%= physicalCashSummary["BOGOSO"] %></td>
+                    <td><%= physicalCashSummary["PRESTEA"] %></td>
+                    <td><%= physicalCashSummary["OTHER"] %></td>
+                    <td><%= physicalCashSummary["PREVIOUS"] %></td>
+                    <td><%= physicalCashSummary["SUSU"] %></td>
+                    <td><%= physicalCashSummary.totalAmount %></td>
+                </tr>
+            </tbody>
+        </table>                
+
+        <!-- Pending Transactions Table -->
+        <table>
+            <caption>Pending Transactions</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="pendingTransactions">
+                <% pendingTransactions.forEach(transaction => { %>
+                    <tr>
+                        <td><%= transaction.Description %></td>
+                        <td><%= transaction.Amount %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr class="Tablestotals">
+                    <td>Total Pending Transactions Amount</td>
+                    <td id="totalPendingTransactions"><%= totalPendingTransactions %></td>
+                </tr>
+            </tfoot>
+        </table>        
+        
+        <table>
+            <caption>Reversals</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="reversals">
+                <% reversals.forEach(reversal => { %>
+                    <tr>
+                        <td><%= reversal.Description %></td>
+                        <td><%= reversal.Amount %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr class="Tablestotals">
+                    <td>Total Reversals Amount</td>
+                    <td id="totalReversals"><%= totalReversals %></td>
+                </tr>
+            </tfoot>
+        </table>        
+
+        <table>
+            <caption>Repayments</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="repayment">
+                <% repayments.forEach(repayment => { %>
+                    <tr>
+                        <td><%= repayment.Description %></td>
+                        <td><%= repayment.Amount %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr class="Tablestotals">
+                    <td>Total Repayments Amount</td>
+                    <td id="totalRepayment"><%= totalRepayment %></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <!-- Given Out table -->
+        <table>
+            <caption>Given Out(s)</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="givenOutRows">
+                <% givenOutTransactions.forEach(transaction => { %>
+                    <tr>
+                        <td><%= transaction.Description %></td>
+                        <td><%= transaction.Amount %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total Given Out Amount</td>
+                    <td id="totalGivenOut"><%= totalGivenOut %></td>
+                </tr>
+            </tfoot>
+        </table>        
+
+        <!-- Personal Expenses table -->
+        <table>
+            <caption>Personal Expenses</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="personalExpensesRows">
+                <% personalExpenses.forEach(expense => { %>
+                    <tr>
+                        <td><%= expense.Description %></td>
+                        <td><%= expense.Amount %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr class="Tablestotals">
+                    <td>Total Personal Expenses Amount</td>
+                    <td id="totalPersonalExpenses"><%= totalPersonalExpenses %></td>
+                </tr>
+            </tfoot>
+        </table>        
+
+        <!--SUSU Table table goes here--->
+        <table>
+            <caption>SUSU Table</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>CREDIT</th>
+                    <th>WALKING</th>
+                    <th>MOBILISERS</th>
+                    <th>WITHDRAWALS</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MXP BOGOSO</td>
+                    <td><%= susuSummary["MXP BOGOSO"].CREDIT %></td>
+                    <td><%= susuSummary["MXP BOGOSO"].WALKING %></td>
+                    <td><%= susuSummary["MXP BOGOSO"].MOBILISERS %></td>
+                    <td><%= susuSummary["MXP BOGOSO"].WITHDRAWALS %></td>
+                    <td><%= susuSummary["MXP BOGOSO"].BAL %></td>
+                </tr>
+                <tr>
+                    <td>LUTECH AIYINASI</td>
+                    <td><%= susuSummary["LUTECH AIYINASI"].CREDIT %></td>
+                    <td><%= susuSummary["LUTECH AIYINASI"].WALKING %></td>
+                    <td><%= susuSummary["LUTECH AIYINASI"].MOBILISERS %></td>
+                    <td><%= susuSummary["LUTECH AIYINASI"].WITHDRAWALS %></td>
+                    <td><%= susuSummary["LUTECH AIYINASI"].BAL %></td>
+                </tr>
+                <tr>
+                    <td>SUSU PRESTEA</td>
+                    <td><%= susuSummary["SUSU PRESTEA"].CREDIT %></td>
+                    <td><%= susuSummary["SUSU PRESTEA"].WALKING %></td>
+                    <td><%= susuSummary["SUSU PRESTEA"].MOBILISERS %></td>
+                    <td><%= susuSummary["SUSU PRESTEA"].WITHDRAWALS %></td>
+                    <td><%= susuSummary["SUSU PRESTEA"].BAL %></td>
+                </tr>
+                <tr class="Tablestotals">
+                    <td>Total</td>
+                    <td><%= susuSummary.Total.CREDIT %></td>
+                    <td><%= susuSummary.Total.WALKING %></td>
+                    <td><%= susuSummary.Total.MOBILISERS %></td>
+                    <td><%= susuSummary.Total.WITHDRAWALS %></td>
+                    <td><%= susuSummary.Total.BAL %></td>
+                </tr>
+            </tbody>
+        </table>        
+
+        <table> 
+            <caption>Commission, Susu & Expenses</caption>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Monthly Commission</th>
+                    <th>Monthly Expenses</th>
+                    <th>Previous Susu Vault Value</th>
+                    <th>Current Susu Vault Value</th>
+
+
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Tablestotals">
+                    <td>Total Amount</td>
+                    <td ><%= commissionMonthly %></td>
+                    <td><%= expenseMonthly %></td>
+                    <td ><%= docType1Amount %></td>
+                    <td ><%= adjustedAmount %></td>
+                   
+                </tr>
+            </tbody>
+        </table>
+
+        
+        
+      <!--commission Table table goes here--->
+      <table>
+        <caption>Commissions</caption>
+        <thead>
+            <tr>
+                <th>Commission</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AIYINASI TELLER 1</td>
+                <td><%= commissionSummary["Aiyinase Teller 1"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>AIYINASI TELLER 2</td>
+                <td><%= commissionSummary["Aiyinase Teller 2"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>BOGOSO TELLER 1</td>
+                <td><%= commissionSummary["Bogoso Teller 1"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>BOGOSO TELLER 2</td>
+                <td><%= commissionSummary["Bogoso Teller 2"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>PRESTEA TELLER 1</td>
+                <td><%= commissionSummary["Prestea Teller 1"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>PRESTEA TELLER 2</td>
+                <td><%= commissionSummary["Prestea Teller 2"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>EZWICH</td>
+                <td><%= commissionSummary["Ezwich"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>REMITTANCE</td>
+                <td><%= commissionSummary["Remittance"] || 0 %></td>
+            </tr>
+            <tr>
+                <td>INTERBANKS COMMISSION</td>
+                <td><%= commissionSummary["Interbank Commission"] || 0 %></td>
+            </tr>
+            <tr class="Tablestotals">
+                <td>Total Commissions</td>
+                <td><%= commissionSummary.Total || 0 %></td>
+            </tr>
+        </tbody>
+      </table>          
+        
+
+        <!--expenses table goes here--->
+        <table>
+            <caption>Expenses</caption>
+            <thead>
+                <tr>
+                    <th>Expenses</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AIYINASI TELLER 1</td>
+                    <td><%= expensesSummary['Aiyinase Teller 1'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>AIYINASI TELLER 2</td>
+                    <td><%= expensesSummary['Aiyinase Teller 2'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>BOGOSO TELLER 1</td>
+                    <td><%= expensesSummary['Bogoso Teller 1'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>BOGOSO TELLER 2</td>
+                    <td><%= expensesSummary['Bogoso Teller 2'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>PRESTEA TELLER 1</td>
+                    <td><%= expensesSummary['Prestea Teller 1'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>PRESTEA TELLER 2</td>
+                    <td><%= expensesSummary['Prestea Teller 2'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>OTHERS</td>
+                    <td><%= expensesSummary['Other'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>DAILY TRANSACTION CHARGES</td>
+                    <td><%= expensesSummary['Daily Transaction Charges'] || 0 %></td>
+                </tr>
+                <tr>
+                    <td>END OF MONTH ACCT. CHARGES</td>
+                    <td><%= expensesSummary['End of Month Acct. Charges'] || 0 %></td>
+                </tr>
+                <tr class="Tablestotals">
+                    <td>Total Expenses</td>
+                    <td><%= expensesSummary.Total || 0 %></td>
+                </tr>
+            </tbody>
+        </table>        
+            
+        </div>
+    </div>
+  <script src="\src\overall.js"></script>
+  <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

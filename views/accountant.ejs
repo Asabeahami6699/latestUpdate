@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Balancing Report</title>
+    <link rel="stylesheet" href="/src/accountantcss.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+</head>
+<body>
+   
+<div class="container">
+    
+ <!-- Hamburger Icon with Menu Label -->
+<span class="hamburger-icon" onclick="toggleSidebar()">
+    <svg viewBox="0 0 100 80" width="40" height="40">
+        <rect width="100" height="15"></rect>
+        <rect y="30" width="100" height="15"></rect>
+        <rect y="60" width="100" height="15"></rect>
+    </svg>
+</span>
+
+     <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <% if (usertype === "Accountant") { %>
+            <button class="menu-item" type="button" onclick="openPopup('accountantPopupForm')">Closing Balance</button>
+            <button class="menu-item" type="button" onclick="openPopup('reportPopupForm')" class="menu-item">Downloaded Report Data</button>
+            <a href="/superuser2" class="menu-item">Superuser Page</a>
+            <a href="/Withdrawals" class="menu-item">Tellers Withdrawal Page</a>
+            <a href="/Deposits" class="menu-item">Tellers Deposit Page</a>
+        <% } %>
+        <button class="menu-item" type="button" onclick="openPopup('dlPopupForm')" class="menu-item">Download Document</button>
+        <% if (usertype === "Accountant") { %>
+            <button class="menu-item" type="button" onclick="openPopup('acctDeltForm')" class="menu-item">Deletion</button>
+        <% } %>
+        <a href="#" class="menu-item" id="back-to-page">Go Back</a>
+        <% if (usertype === "Accountant") { %>
+            <form action="/logout?_method=DELETE" method="POST">
+                <button class="menu-item" type="submit">Log Out</button>
+            </form>
+        <% } %>
+    </div>
+    <!-- Main Content Container -->
+    
+        <h2>CASH BALANCING</h2>
+
+    
+        <!-- Deposits and Withdrawals Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">BRANCH</th>
+                    <th colspan="9">DEPOSITS</th>
+                    <th colspan="11">WITHDRAWALS</th>
+                    <th rowspan="2">CLOSING BAL</th>
+                    <th rowspan="2">TOTAL</th>
+                </tr>
+                <tr>
+                    <th>P-CASH</th>
+                    <th>SUSU</th>
+                    <th>MTN</th>
+                    <th>VODA</th>
+                    <th>CAL BANK</th>
+                    <th>ECOBANK</th>
+                    <th>O-BANKS</th>
+                    <th>FIDELITY</th>
+                    <th>TOTAL</th>
+                    <th>CASH TO BANK</th>
+                    <th>SUSU</th>
+                    <th>MTN</th>
+                    <th>VODA</th>
+                    <th>FIDELITY</th>
+                    <th>ECOBANK</th>
+                    <th>EZWICH</th>
+                    <th>ATM</th>
+                    <th>REMIT'S</th>
+                    <th>G-MONEY</th>
+                    <th>EXPENSES</th>
+                    <th>BRANCH</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>AIYINASE TELLER 1</td>
+                    <td><%= acpch1 %></td>
+                    <td><%= AT1SutransferredAmount %></td>
+                    <td><%= AT1transferredAmount %></td>
+                    <td><%= AT1VodatransferredAmount %></td>
+                    <td><%= AT1CtransferredAmount %></td>
+                    <td><%= AT1EtransferredAmount %></td>
+                    <td><%= AT1ObtransferredAmount %></td>
+                    <td><%= AT1FtransferredAmount %></td>
+                    <td><%= AT1TTotalcPcash %></td>
+                    <td><%= A1Load %></td>
+                    <td><%= A1susu %></td>
+                    <td><%= A1MTN %></td>
+                    <td><%= A1VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= A1Em %></td>
+                    <td><%= A1Ezmm %></td>
+                    <td><%= A1Atm %></td>
+                    <td><%= A1Remm %></td>
+                    <td><%= A1Gmm %></td>
+                    <td><%= A1Exp %></td>
+                    <td><%= A1cashR %></td>
+                    <td>31203.8</td>
+                    <td>AIYINASE TELLER1</td>
+                </tr>
+
+                <tr>
+                    <td>AIYINASE TELLER 2</td>
+                    <td><%= acpch2 %></td>
+                    <td><%= AT2SutransferredAmount %></td>
+                    <td><%= AT2transferredAmount %></td>
+                    <td><%= AT2VodatransferredAmount %></td>
+                    <td><%= AT2CtransferredAmount %></td>
+                    <td><%= AT2EtransferredAmount %></td>
+                    <td><%= AT2ObtransferredAmount %></td>
+                    <td><%= AT2FtransferredAmount %></td>
+                    <td><%= AT2TTotalcPcash %></td>
+                    <td><%= A2Load %></td>
+                    <td><%= A2susu %></td>
+                    <td><%= A2MTN %></td>
+                    <td><%= A2VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= A2Em %></td>
+                    <td><%= A2Ezmm %></td>
+                    <td><%= A2Atm %></td>
+                    <td><%= A2Remm %></td>
+                    <td><%= A2Gmm %></td>
+                    <td><%= A2Exp %></td>
+                    <td><%= A2cashR %></td>
+                    <td>0000</td>
+                    <td>AIYINASE TELLER2</td>
+                </tr>
+                <!-- Data Rows -->
+                <tr>
+                    <td>BOGOSO TELLER 1</td>
+                    <td><%= acpch3 %></td>
+                    <td><%= BT1SutransferredAmount %></td>
+                    <td><%= BT1transferredAmount %></td>
+                    <td><%= BT1VodatransferredAmount %></td>
+                    <td><%= BT1CtransferredAmount %></td>
+                    <td><%= BT1EtransferredAmount %></td>
+                    <td><%= BT1ObtransferredAmount %></td>
+                    <td><%= BT1FtransferredAmount %></td>
+                    <td><%= BT1TTotalcPcash %></td>
+                    <td><%= B1Load %></td>
+                    <td><%= B1susu %></td>
+                    <td><%= B1MTN %></td>
+                    <td><%= B1VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= B1Em %></td>
+                    <td><%= B1Ezmm %></td>
+                    <td><%= B1Atm %></td>
+                    <td><%= B1Remm %></td>
+                    <td><%= B1Gmm %></td>
+                    <td><%= B1Exp %></td>
+                    <td><%= B1cashR %></td>
+                    <td>91149.61</td>
+                    <td>BOGOSO TELLER1</td>
+                </tr>
+
+                <tr>
+                    <td>BOGOSO TELLER 2</td>
+                    <td><%= acpch4 %></td>
+                    <td><%= BT2SutransferredAmount %></td>
+                    <td><%= BT2transferredAmount %></td>
+                    <td><%= BT2VodatransferredAmount %></td>
+                    <td><%= BT2CtransferredAmount %></td>
+                    <td><%= BT2EtransferredAmount %></td>
+                    <td><%= BT2ObtransferredAmount %></td>
+                    <td><%= BT2FtransferredAmount %></td>
+                    <td><%= BT2TTotalcPcash %></td>
+                    <td><%= B2Load %></td>
+                    <td><%= B2susu %></td>
+                    <td><%= B2MTN %></td>
+                    <td><%= B2VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= B2Em %></td>
+                    <td><%= B2Ezmm %></td>
+                    <td><%= B2Atm %></td>
+                    <td><%= B2Remm %></td>
+                    <td><%= B2Gmm %></td>
+                    <td><%= B2Exp %></td>
+                    <td><%= B2cashR %></td>
+                    <td>0000</td>
+                    <td>BOGOSO TELLER2</td>
+                </tr>
+
+                <tr>
+                    <td>PRESTEA TELLER 1</td>
+                    <td><%= acpch5 %></td>
+                    <td><%= PT1SutransferredAmount %></td>
+                    <td><%= PT1transferredAmount %></td>
+                    <td><%= PT1VodatransferredAmount %></td>
+                    <td><%= PT1CtransferredAmount %></td>
+                    <td><%= PT1EtransferredAmount %></td>
+                    <td><%= PT1ObtransferredAmount %></td>
+                    <td><%= PT1FtransferredAmount %></td>
+                    <td><%= PT1TTotalcPcash %></td>
+                    <td><%= P1Load %></td>
+                    <td><%= P1susu %></td>
+                    <td><%= P1MTN %></td>
+                    <td><%= P1VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= P1Em %></td>
+                    <td><%= P1Ezmm %></td>
+                    <td><%= P1Atm %></td>
+                    <td><%= P1Remm %></td>
+                    <td><%= P1Gmm %></td>
+                    <td><%= P1Exp %></td>
+                    <td><%= P1cashR %></td>
+                    <td>908.73</td>
+                    <td>PRESTEA TELLER1</td>
+                </tr>
+                <tr>
+                    <td>PRESTEA TELLER 2</td>
+                    <td><%= acpch6 %></td>
+                    <td><%= PT2SutransferredAmount %></td>
+                    <td><%= PT2transferredAmount %></td>
+                    <td><%= PT2VodatransferredAmount %></td>
+                    <td><%= PT2CtransferredAmount %></td>
+                    <td><%= PT2EtransferredAmount %></td>
+                    <td><%= PT2ObtransferredAmount %></td>
+                    <td><%= PT2FtransferredAmount %></td>
+                    <td><%= PT2TTotalcPcash %></td>
+                    <td><%= P2Load %></td>
+                    <td><%= P2susu %></td>
+                    <td><%= P2MTN %></td>
+                    <td><%= P2VWm %></td>
+                    <td>FIDEL</td>
+                    <td><%= P2Em %></td>
+                    <td><%= P2Ezmm %></td>
+                    <td><%= P2Atm %></td>
+                    <td><%= P2Remm %></td>
+                    <td><%= P2Gmm %></td>
+                    <td><%= P2Exp %></td>
+                    <td><%= P2cashR %></td>
+                    <td>0000</td>
+                    <td>PRESTEA TELLER2</td>
+                </tr>
+                <tr class="total-row">
+                    <td class="total-row">TOTAL</td>
+                    <td><%= acpchtl %></td>
+                    <td><%= ttsd %></td>
+                    <td><%= ttmd %></td>
+                    <td><%= ttvd %></td>
+                    <td><%= ttcd %></td>
+                    <td><%= tted %></td>
+                    <td><%= ttod %></td>
+                    <td><%= ttfd %></td>
+                    <td><%= ttdp %></td>
+                    <td><%= ttcb %></td>
+                    <td><%= ttsw %></td>
+                    <td><%= ttmw %></td>
+                    <td><%= ttvw %></td>
+                    <td>FIDEL</td>
+                    <td><%= ttew %></td>
+                    <td><%= ttezw %></td>
+                    <td><%= ttaw %></td>
+                    <td><%= ttrw %></td>
+                    <td><%= ttgw %></td>
+                    <td><%= texp %></td>
+                    <td><%= ttcr %></td>
+                    <td></td>
+                    <td>TOTAL</td>
+                </tr>
+                <tr class="total-row">
+                    <td class="total-row">Downloaded Report</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="total-row">Remaining</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                
+            </tbody>
+        </table>
+   
+        <!-- Summary Section -->
+        <div class="tables-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>COMMISSIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AIYINASE TELLER 1</td>
+                        <td><%= A1Comm %></td>
+                    </tr>
+                    <tr>
+                        <td>AIYINASE TELLER 2</td>
+                        <td><%= A2Comm %></td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO TELLER 1</td>
+                        <td><%= B1Comm %></td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO TELLER 2</td>
+                        <td><%= B2Comm %></td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA TELLER 1</td>
+                        <td><%= P1Comm %></td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA TELLER 2</td>
+                        <td><%= P2Comm %></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table class="table">
+                <thead>
+                    
+                        <th>EXPRESS WITHDRAWAL/ CASHOUTS</th>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Account 54</td>
+                        <td><%= E1ot %></td>
+                    </tr>
+                    <tr>
+                        <td>Account 10</td>
+                        <td><%= E3ot %></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>CLOSING BALANCES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BRANCH</td>
+                        <td>ACCOUNTANT</td>
+                        <td>TELLER(S)</td>
+                        <td>DIFFERENCE</td>
+                    </tr>
+                    <tr>
+                        <td>AIYINASE TELLER 1</td>
+                        <td>31203.8</td>
+                        <td><%= A1cashR %></td>
+                        <td>-452</td>
+                    </tr>
+
+                    <tr>
+                        <td>AIYINASE TELLER 2</td>
+                        <td>31203.8</td>
+                        <td><%= A2cashR %></td>
+                        <td>-452</td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO TELLER 1</td>
+                        <td>91149.61</td>
+                        <td><%= B1cashR %></td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO TELLER 2</td>
+                        <td>91149.61</td>
+                        <td><%= B2cashR %></td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA TELLER 1</td>
+                        <td>908.73</td>
+                        <td><%= P1cashR %></td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA TELLER 2</td>
+                        <td>908.73</td>
+                        <td><%= P2cashR %></td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Expenses Section -->
+        <h3>EXPENSES</h3>
+<div class="tables-container">
+    <!-- Bogoso Expenses Table -->
+    <table class="expenses-table bogoso-expenses">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="location-header">
+                <td colspan="3">Bogoso</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>MEITECH SUS TNT</td>
+                <td>85</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>DISPENSER REFILL</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>FUEL</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>TNT</td>
+                <td>132</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>RUBBER</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>ELECTRICIANS</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Bogoso</td>
+                <td>MEISUEDISON M-CREDIT</td>
+                <td>150</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2">Total Bogoso</td>
+                <td>GHC <%= actexpb %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Prestea Expenses Table -->
+    <table class="expenses-table prestea-expenses">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="location-header">
+                <td colspan="3">Prestea</td>
+            </tr>
+            <tr>
+                <td>Prestea</td>
+                <td>MEISUEDISON MICRO CREDIT</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Prestea</td>
+                <td>MEISUEDISON MICRO CREDIT</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Prestea</td>
+                <td>MEISUEDISON MICRO CREDIT</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>Prestea</td>
+                <td>MEISUEDISON MICRO CREDIT</td>
+                <td>60</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2">Total Prestea</td>
+                <td>GHC <%= actexpp %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Aiyinase Expenses Table -->
+    <table class="expenses-table aiyinase-expenses">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="location-header">
+                <td colspan="3">Aiyinase</td>
+            </tr>
+            <tr>
+                <td>Aiyinase</td>
+                <td>BAG REPAIR</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Aiyinase</td>
+                <td>SECURITY</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Aiyinase</td>
+                <td>TNT TO & FROM MENZEZOR</td>
+                <td>10</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2">Total Aiyinase</td>
+                <td>GHC <%= actexpa %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Overall Total Expenses Table -->
+    <table class="expenses-table total-expenses">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td colspan="2">Total Expenses</td>
+                <td>GHC <%= texp %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="overlay">
+    <div class="popup-form" id="accountantPopupForm">
+        <h2>Closing Balance Form</h2>
+        <form  id="closingBlnForm" action="/AccountantForm" method="post">
+            <select name="FormType" style="display:none;" required>
+                <option value="Closing Balance" selected>Closing Balance</option>
+            </select>    
+            <label for="branch">Branch:</label>
+            <select id="branch" name="branch" required>
+                <option value="" disabled selected>Select Branch</option>
+                <option value="Aiyinasi">Aiyinasi</option>
+                <option value="Prestea">Prestea</option>
+                <option value="Bogoso">Bogoso</option>
+            </select>
+            <label for="tellerType">Teller Type:</label>
+            <select id="tellerType" name="tellerType" required>
+                <option value="" disabled selected>Select Teller type</option>
+                <option value="Teller 1">Teller 1</option>
+                <option value="Teller 2">Teller 2</option>
+            </select>
+            <br>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="any" placeholder="Enter The Amount" required>
+            <p id="err1" class="error" style="display:none;">Please all fieds are required!!</p>
+            <button type="button" onclick="Confirm1()">Preview Inputs</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div id="accountantPreview" class="popup-form">
+        <h2>Confirm Transaction Details</h2>
+        <hr>
+        <form>
+            <p class="con-txt">Bank Type: <span id="previewBranch" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Teller Type: <span id="previewTellerType" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Amount: <span id="previewAmount" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="Submit1()">Confirm and Submit</button>
+            <hr>
+            <button type="button" onclick="Back1()">Back</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div class="popup-form" id="reportPopupForm">
+        <h2>Downloaded Report Form</h2>
+        <form id="dlReportsForm"  action="/AccountantForm" method="post">
+            <select name="FormType" style="display:none;" required>
+                <option value="Downloaded Report" selected>Downloaded Report</option>
+            </select>    
+            <label for="accounttype">Account Type:</label>
+            <select id="accounttype" name="accounttype" required>
+                <option value="" disabled selected>Select Account Type</option>
+                <option value="MoMo">MoMo</option>
+                <option value="Ecobank">Ecobank</option>
+                <option value="Calbank">Calbank</option>
+                <option value="Fidelity">Fidelity</option>
+            </select>
+            <label for="reportAmount">Amount:</label>
+            <input type="number" id="reportAmount" name="amount" step="any" placeholder="Enter Amount" required>
+            <p id="err2" class="error" style="display:none;">Please all fieds are required!!</p>
+            <button type="button" onclick="Confirm2()">Preview Inputs</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div id="dlReportPreview" class="popup-form">
+        <h2>Confirm Transaction Details</h2>
+        <hr>
+        <form>
+            <p class="con-txt">Account Type: <span id="previewAccount" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Amount: <span id="reportPreviewAmount" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="Submit2()">Confirm and Submit</button>
+            <hr>
+            <button type="button" onclick="Back2()">Back</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div class="popup-form" id="dlPopupForm">
+        <h2>Document Download Form</h2>
+        <form id="dlReportsForm"  action="/downloadByAcct" method="post">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+            <button type="submit">Download</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div class="popup-form" id="acctDeltForm">
+        <h2>Document Deletion Form</h2>
+        <form id="docDeltForm" >
+            <label >Enter Transaction ID:</label>
+            <input type="text" id="transDelt" name="deletion2" required /> 
+            <p id="errorSmsDelt" class="error" >Please fill the field!!</p>
+            <button type="button" onclick="Confirm3()">Preview Input</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <div id="accDeltPrv" class="popup-form">
+        <h2>Confirm Transaction ID</h2>
+        <hr>
+        <form>
+            <p class="con-txt">Transaction ID: <span id="previewtransactionID" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="submitDel()">Confirm and Delete</button>
+            <hr>
+            <button type="button" onclick="Back3()">Back</button>
+        </form>
+        <hr>
+        <button type="button" onclick="hideForm()">Close</button>
+    </div>
+
+    <span id="loading" class="loader"></span>
+
+    <div id="failure-sms" class="pixal">
+        <div>
+            <img src="imgs and icons/icons8-wrong.gif" >
+            <div>Error Occurred While Processing Request, Please Try Again !</div>
+        </div>
+    </div>
+    <div id="successful-sms" class="pixal">
+        <div>
+            <img src="imgs and icons/Animation-check-new.gif">
+            <di>The Record is successfully Saved</di>
+        </div>
+    </div>
+    <div id="successD-sms-delS" class="pixal">
+        <div>
+            <img src="imgs and icons/Animation-Trash-2.gif">
+            <div>Document Is Deleted Successfully</div>
+        </div>
+    </div>
+
+    <div id="failure-sms-delE" class="pixal">
+        <div>
+            <img src="imgs and icons/icons8-error.gif" >
+            <div>Document Does Not Exist</div>
+        </div>
+    </div>
+
+</div>
+<script src="\src\accountant.js"></script>
+<script src="src/inactivityTimer.js"></script>
+</body>
+</html>

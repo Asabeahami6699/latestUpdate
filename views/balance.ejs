@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/balance.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    <title>Tellers Deposit Page</title>
+</head>
+<body>
+    <div id="Top-bar">
+        <p>ALL TELLERS DEPOSIT TRANSACTIONS</p>
+        <hr>
+    </div>
+    <div class="midd-cont">
+        <p class="text-dp">Choose Teller By Click On The Respective Button !</p>
+        <div class="button-group">
+            <button type="button" onclick="AT1DP()">Aiyinase Teller 1</button>
+            <button type="button" onclick="AT2DP()">Aiyinase Teller 2</button>
+        </div>
+        <div class="button-group">
+            <button type="button" onclick="BT1DP()">Bogoso Teller 1</button>
+            <button type="button" onclick="BT2DP()">Bogoso Teller 2</button>
+        </div>
+        <div class="button-group">
+            <button type="button" onclick="PT1DP()">Prestea Teller 1</button>
+            <button type="button" onclick="PT2DP()">Prestea Teller 2</button>
+        </div>
+        <p class="text-dp">Click Here To View All Deposit Transactions !</p>
+        <div class="button-group">
+            <button type="button"onclick="ATTDPT()">Total Deposit Transactions</button>
+        </div>
+    </div>
+    <div id="overlay">
+        <div id="AT1-form" class="popup-form">
+            <h2>Aiyinase Teller 1 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT1Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT1VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= AT1TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= AT1TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= AT1InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= AT1totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= AT1TTotalcPcash%></h2>
+                </div>
+            </div> 
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="AT2-form" class="popup-form">
+            <h2>Aiyinase Teller 2 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= AT2Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= AT2VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= AT2TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= AT2TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= AT2InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= AT2totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= AT2TTotalcPcash%></h2>
+                </div>
+            </div>
+            <button type="button" onclick="hideForm()">Close</button> 
+        </div>
+        <div id="BT1-form" class="popup-form">
+            <h2>Bogoso Teller 1 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT1Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT1VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= BT1TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= BT1TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= BT1InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= BT1totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= BT1TTotalcPcash%></h2>
+                </div>
+            </div>
+            <button type="button" onclick="hideForm()">Close</button> 
+        </div>
+        <div id="BT2-form" class="popup-form">
+            <h2>Bogoso Teller 2 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= BT2Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= BT2VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= BT2TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= BT2TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= BT2InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= BT2totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= BT2TTotalcPcash%></h2>
+                </div>
+            </div>
+            <button type="button" onclick="hideForm()">Close</button> 
+        </div>
+        <div id="PT1-form" class="popup-form">
+            <h2>Prestea Teller 1 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT1Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT1VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= PT1TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= PT1TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= PT1InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= PT1totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= PT1TTotalcPcash%></h2>
+                </div>
+            </div>
+            <button type="button" onclick="hideForm()">Close</button> 
+        </div>
+        <div id="PT2-form" class="popup-form">
+            <h2>Prestea Teller 2 Menu</h2>
+            <hr>
+            <div class="sub-momo">
+                <p class="tot"> MTN-MOMO-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2count%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2transferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> FIDELITY-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2countF%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2FtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> ECOBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2countE%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2EtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-cal">
+                <p class="tot"> CALBANK-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2countC%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2CtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-momo">
+                <p class="tot">OTHER-BANKS</p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2odcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2ObtransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-fidel">
+                <p class="tot"> SUSU-DEPOSIT-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2countsusu%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2SutransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-container">
+                <p class="tot"> VODA-CASH-SECTION </p>
+                <div class="card-disp">
+                    <h1>Today's Customers</h1>
+                    <h2><%= PT2Vcount%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Amount Deposited</h1>
+                    <h2>GHC <%= PT2VodatransferredAmount%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Today's Total Customers</h1>
+                    <h2><%= PT2TotalCostumers%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Total Amount Deposited</h1>
+                    <h2>GHC <%= PT2TotalAmoutTrans%></h2>
+                </div>
+            </div>
+            <div class="sub-total1">
+                <p class="tot">OUTPUTS</p>
+                <div class="card-disp">
+                    <h1>Initial Physical Cash</h1>
+                    <h2>GHC <%= PT2InitialPCash%></h2>
+                </div>
+                <div class="card-disp">
+                    <h1>Physical Cash Collected</h1>
+                    <h2>GHC <%= PT2totalColtdPcash%></h2>
+                </div>
+            </div>
+            <div class="sub-total2">
+                <p class="tot">OVERALL DEPOSIT</p>
+                <div class="card-disp1">
+                    <h1>Actual Amount Deposited</h1>
+                    <h2>GHC <%= PT2TTotalcPcash%></h2>
+                </div>
+            </div>
+            <button type="button" onclick="hideForm()">Close</button> 
+        </div>
+        <div id="ATTD-form" class="popup-form">
+            <h2>Overall Deposit Transactions Menu</h2>
+            <hr>
+            <form >
+                <h2>Total MTN Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttmd%></p>
+                <h2>Total Vodafone Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttvd%></p>
+                <h2>Total Susu Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttsd%></p>
+                <h2>Total Ecobank Deposited</h2>
+                <p class="vip">Amount: GHC <%= tted%></p>
+                <h2>Total Fidelity Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttfd%></p>
+                <h2>Total Calbank Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttcd%></p>
+                <h2>Total Other Banks Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttod%></p>
+                <h2>All Tellers Total Initial Physical Cash</h2>
+                <p class="vip">Amount: GHC <%= ttin%></p>
+                <h2>All Tellers Total Customers</h2>
+                <p class="vip"> Number: <%= ttdc%></p>
+                <h2>All Tellers Total Physical Cash Collected</h2>
+                <p class="vip">Amount: GHC <%= ttcc%></p>
+                <h2>All Tellers Total Amount Deposited</h2>
+                <p class="vip">Amount: GHC <%= ttaf%></p>
+                <h2>All Tellers Actual Deposited Cash</h2>
+                <p class="vip">Amount: GHC <%= ttdp%></p>
+               </form>
+               <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+    </div>
+    <script src="src/balance.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>

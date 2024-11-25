@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/login-page.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    <title>Meisuedison Limited</title>
+</head>
+<body>
+<div class="background-container">
+    <div class="company-name">
+      <h1>MEISUEDISON LIMITED</h1>
+    </div>
+    <div class="login-Form">
+        <form action="/Userslogin" method="post" onsubmit="handleSubmit(event)">
+            <i id="bigIcn" class="fa fa-users"></i>
+            <div class="input-container">
+                <i class="fa fa-circle-user"></i>
+                <input type="text" name="name" id="username" placeholder="USERNAME" required>
+            </div>
+            <div class="input-container">
+                <i class="fa fa-key"></i>
+                <input type="password" name="Password" id="password" placeholder="PASSWORD" required>
+            </div>
+            <button type="submit" id="login-bttn">Log in</button>
+        </form>
+        <h3>
+            <% if (messages.error) { %>
+                <%= messages.error %>
+            <% } %> 
+        </h3>
+    </div>    
+</div>
+<script src="src/login-page.js"></script>
+</body>
+</html>

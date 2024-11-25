@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Customer Service Personnels Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/src/cservice2.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="buttons">
+        <button onclick="funct1('choose')">
+        <i class="fa fa-download"></i>  Download Records</button>
+        <a href="#" class="back-to-page">
+        <i class="fa fa-right-from-bracket"></i>Go Back</a>
+    </div>
+
+    <div class="accordion-container">
+        <div class="accordion">
+            <h3 class="accordion-header">Aiyinase Customer Service Personnel Records</h3>
+            <div class="accordion-content">
+                <p>Number of Recorded Customers for Express Account Created: <span class="span"><%= acsd2 %></span></p>
+                <hr>
+                <p>Number of Recorded Customers for Ecobank Withdrawals: <span class="span"><%= acsd1 %></span></p>
+                <hr>
+                <p>Total Amount for Ecobank Withdrawals: GHC <span class="span"><%= acsamt1 %></span></p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <h3 class="accordion-header">Bogoso Customer Service Personnel Records</h3>
+            <div class="accordion-content">
+                <p>Number of Recorded Customers for Express Account Created: <span class="span"><%= bcsd2 %></span></p>
+                <hr>
+                <p>Number of Recorded Customers for Ecobank Withdrawals: <span class="span"><%= bcsd1 %></span></p>
+                <hr>
+                <p>Total Amount for Ecobank Withdrawals: GHC <span class="span"><%= bcsamt1 %></span></p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <h3 class="accordion-header">Prestea Customer Service Personnel Records</h3>
+            <div class="accordion-content">
+                <p>Number of Recorded Customers for Express Account Created: <span class="span"><%= pcsd2 %></span></p>
+                <hr>
+                <p>Number of Recorded Customers for Ecobank Withdrawals: <span class="span"><%= pcsd1 %></span></p>
+                <hr>
+                <p>Total Amount for Ecobank Withdrawals: GHC <span class="span"><%= pcsamt1 %></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay">
+        <div id="choose" class="popup-form">
+            <h2>Choose An Option To Download</h2>
+            <form>
+                <button type="button" onclick="funct2('csDl1-form')">Download Express Accounts Created</button>
+                <hr>
+                <button type="button" onclick="funct2('csDl2-form')">Download Ecobank Withdrawal</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csDl1-form" class="popup-form">
+            <h2>Download Express Accounts Created Data</h2>
+            <form action="/csExAcctDataDl" method="post">
+                <label>Select branch</label>
+                <select id="branch" name="branch" required>
+                    <option value="null" disabled selected hidden>Select An Option</option>
+                    <option value="Aiyinase">Aiyinase</option>
+                    <option value="Prestea">Prestea</option>
+                    <option value="Bogoso">Bogoso</option>
+                </select>
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                <button type="submit" >Download</button>
+                <hr>
+                <button type="button" onclick="funct3('csDl1-form')">Back</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csDl2-form" class="popup-form">
+            <h2>Download Ecobank Withdrawal Data</h2>
+            <form action="/csEcoWithwlsDl" method="post">
+                <label>Select branch</label>
+                <select id="branch" name="branch" required>
+                    <option value="null" disabled selected hidden>Select An Option</option>
+                    <option value="Aiyinase">Aiyinase</option>
+                    <option value="Prestea">Prestea</option>
+                    <option value="Bogoso">Bogoso</option>
+                </select>
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                <button type="submit" >Download</button>
+                <hr>
+                <button type="button" onclick="funct3('csDl2-form')">Back</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+    </div>
+
+    <script src="\src\cservice2.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

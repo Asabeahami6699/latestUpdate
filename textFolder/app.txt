@@ -1,0 +1,5 @@
+                    <label for="view-Teller">Transaction Type:</label>
+                    <select id="otselt" name="otherEco" required>
+                    <option value="null" disabled selected hidden>......</option>
+                    <option value="Other Ecobank Deposits">InterBank Transaction</option>
+                    </select>

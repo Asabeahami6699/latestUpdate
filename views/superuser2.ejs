@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/superuser2.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    <title>Balancing Page</title>
+</head>
+<body>
+    <div id="Top-bar">
+        <div id="consists">
+            <div>
+                <li onclick="TandSbalancing()">Tellers And Superuser Balancing Form</li>
+            </div>
+            <div>
+                <li onclick="Sbalancing()">Superuser Balancing Form</li>
+            </div>
+            <div>
+                <li onclick="XportAllDocs()">Download Superuser Documents</li>
+            </div>
+            <div>
+                <a href="#" class="back-to-page">Go Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="Main">
+        <div id="topmost-items">
+            <div class="Obanks-card">
+                <p>OTHER BANKS DEPOSITS</p>
+                <p>GHC <%= sttb%></p>
+            </div>
+            <div class="Obanks-card">
+                <p>FIDELITY WITHDRAWAL</p>
+                <p>GHC <%= FidWd%></p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="tell-disp">SUPERUSER ECOBANK CASH OUT AND OTHER DEPOSITS TABLES</p>
+        <table id="T-left">
+            <thead>
+                <tr>
+                    <th>CASH OUT ACCOUNT</th>
+                    <th>AMOUNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ECOBANK 54</td>
+                    <td>GHC <%= E1ot%></td>
+                </tr>
+                <tr>
+                    <td>ECOBANK 20</td>
+                    <td>GHC <%= E2ot%></td>
+                </tr>
+                <tr>
+                    <td>ECOBANK 10</td>
+                    <td>GHC <%= E3ot%></td>
+                </tr>
+                <tr>
+                    <td>ECOBANK 80</td>
+                    <td>GHC <%= E4ot%></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="T-right">
+            <thead>
+                <tr>
+                    <th>OTHER DEPOSITS</th>
+                    <th>AMOUNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MTN MOMO</td>
+                    <td>GHC <%= omtn%></td>
+                </tr>
+                <tr>
+                    <td>ECOBANK</td>
+                    <td>GHC <%= OtEc%></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="pink" onclick="mcb()">MoMo Charges Button</button>
+    <div id="overlay">
+        <div id="TandS-form" class="formxx">
+            <form class="form1" >
+                <p class="tell-disp1">TOTAL MTN MOMO DEPOSITS TABLE</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= AT1transferredAmount%></td>
+                            <td>GHC <%= AT2transferredAmount%></td>
+                            <td>GHC <%= BT1transferredAmount%></td>
+                            <td>GHC <%= BT2transferredAmount%></td>
+                            <td>GHC <%= PT1transferredAmount%></td>
+                            <td>GHC <%= PT2transferredAmount%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1mo%></td>
+                            <td>GHC <%= sa2mo%></td>
+                            <td>GHC <%= sb1mo%></td>
+                            <td>GHC <%= sb2mo%></td>
+                            <td>GHC <%= sp1mo%></td>
+                            <td>GHC <%= sp2mo%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1mdf%></td>
+                            <td>GHC <%= sa2mdf%></td>
+                            <td>GHC <%= sb1mdf%></td>
+                            <td>GHC <%= sb2mdf%></td>
+                            <td>GHC <%= sp1mdf%></td>
+                            <td>GHC <%= sp2mdf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">TOTAL ECOBANK DEPOSITS TABLES</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= AT1EtransferredAmount%></td>
+                            <td>GHC <%= AT2EtransferredAmount%></td>
+                            <td>GHC <%= BT1EtransferredAmount%></td>
+                            <td>GHC <%= BT2EtransferredAmount%></td>
+                            <td>GHC <%= PT1EtransferredAmount%></td>
+                            <td>GHC <%= PT2EtransferredAmount%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1e%></td>
+                            <td>GHC <%= sa2e%></td>
+                            <td>GHC <%= sb1e%></td>
+                            <td>GHC <%= sb2e%></td>
+                            <td>GHC <%= sp1e%></td>
+                            <td>GHC <%= sp2e%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1edf%></td>
+                            <td>GHC <%= sa2edf%></td>
+                            <td>GHC <%= sb1edf%></td>
+                            <td>GHC <%= sb2edf%></td>
+                            <td>GHC <%= sp1edf%></td>
+                            <td>GHC <%= sp2edf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">TOTAL FIDELITY DEPOSITS TABLES</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= AT1FtransferredAmount%></td>
+                            <td>GHC <%= AT2FtransferredAmount%></td>
+                            <td>GHC <%= BT1FtransferredAmount%></td>
+                            <td>GHC <%= BT2FtransferredAmount%></td>
+                            <td>GHC <%= PT1FtransferredAmount%></td>
+                            <td>GHC <%= PT2FtransferredAmount%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1f%></td>
+                            <td>GHC <%= sa2f%></td>
+                            <td>GHC <%= sb1f%></td>
+                            <td>GHC <%= sb2f%></td>
+                            <td>GHC <%= sp1f%></td>
+                            <td>GHC <%= sp2f%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1fdf%></td>
+                            <td>GHC <%= sa2fdf%></td>
+                            <td>GHC <%= sb1fdf%></td>
+                            <td>GHC <%= sb2fdf%></td>
+                            <td>GHC <%= sp1fdf%></td>
+                            <td>GHC <%= sp2fdf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">TOTAL CALBANK DEPOSITS TABLES</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= AT1CtransferredAmount%></td>
+                            <td>GHC <%= AT2CtransferredAmount%></td>
+                            <td>GHC <%= BT1CtransferredAmount%></td>
+                            <td>GHC <%= BT2CtransferredAmount%></td>
+                            <td>GHC <%= PT1CtransferredAmount%></td>
+                            <td>GHC <%= PT2CtransferredAmount%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1c%></td>
+                            <td>GHC <%= sa2c%></td>
+                            <td>GHC <%= sb1c%></td>
+                            <td>GHC <%= sb2c%></td>
+                            <td>GHC <%= sp1c%></td>
+                            <td>GHC <%= sp2c%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1cdf%></td>
+                            <td>GHC <%= sa2cdf%></td>
+                            <td>GHC <%= sb1cdf%></td>
+                            <td>GHC <%= sb2cdf%></td>
+                            <td>GHC <%= sp1cdf%></td>
+                            <td>GHC <%= sp2cdf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">TOTAL OTHER BANKS DEPOSITS TABLES</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= AT1ObtransferredAmount%></td>
+                            <td>GHC <%= AT2ObtransferredAmount%></td>
+                            <td>GHC <%= BT1ObtransferredAmount%></td>
+                            <td>GHC <%= BT2ObtransferredAmount%></td>
+                            <td>GHC <%= PT1ObtransferredAmount%></td>
+                            <td>GHC <%= PT2ObtransferredAmount%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1o%></td>
+                            <td>GHC <%= sa2o%></td>
+                            <td>GHC <%= sb1o%></td>
+                            <td>GHC <%= sb2o%></td>
+                            <td>GHC <%= sp1o%></td>
+                            <td>GHC <%= sp2o%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1odf%></td>
+                            <td>GHC <%= sa2odf%></td>
+                            <td>GHC <%= sb1odf%></td>
+                            <td>GHC <%= sb2odf%></td>
+                            <td>GHC <%= sp1odf%></td>
+                            <td>GHC <%= sp2odf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">TOTAL TELLERS AND SUPERUSER COMMISSION TABLES</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>TELLERS</th>
+                            <th>AIYINASE TELLER 1</th>
+                            <th>AIYINASE TELLER 2</th>
+                            <th>BOGOSO TELLER 1</th>
+                            <th>BOGOSO TELLER 2</th>
+                            <th>PRESTEA TELLER 1</th>
+                            <th>PRESTEA TELLER 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TELLERS'S TOTAL</td>
+                            <td>GHC <%= A1Comm%></td>
+                            <td>GHC <%= A2Comm%></td>
+                            <td>GHC <%= B1Comm%></td>
+                            <td>GHC <%= B2Comm%></td>
+                            <td>GHC <%= P1Comm%></td>
+                            <td>GHC <%= P2Comm%></td>
+                        </tr>
+                        <tr>
+                            <td>SUPERUSER'S TOTAL</td>
+                            <td>GHC <%= sa1cm%></td>
+                            <td>GHC <%= sa2cm%></td>
+                            <td>GHC <%= sb1cm%></td>
+                            <td>GHC <%= sb2cm%></td>
+                            <td>GHC <%= sp1cm%></td>
+                            <td>GHC <%= sp2cm%></td>
+                        </tr>
+                        <tr>
+                            <td>DIFFERENCES</td>
+                            <td>GHC <%= sa1cmdf%></td>
+                            <td>GHC <%= sa2cmdf%></td>
+                            <td>GHC <%= sb1cmdf%></td>
+                            <td>GHC <%= sb2cmdf%></td>
+                            <td>GHC <%= sp1cmdf%></td>
+                            <td>GHC <%= sp2cmdf%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button  type="button" onclick="close2()">Close</button>
+            </form>
+        </div>
+        <div id="XportAllDocs-form3" class="popup-form">
+            <h2 class="form-title">Select The Date</h2>
+            <form action="/downloadS" method="post">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                <button type="submit" >Download  Data</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="SuperuserBlc-form" class="formxx">
+            <form class="form1">
+                <p class="tell-disp1">SUPERUSER ACCOUNT BALANCING FOR ALL TRANSACTIONS EXCEPT ECOBANK</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>ACCOUNTS</th>
+                            <th>OPENING BALANCE</th>
+                            <th>E-CASH COLLECTED</th>
+                            <th>TOTAL ENTRIES</th>
+                            <th>CLOSING BALANCE</th>
+                            <th>FINAL BALANCING</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CALBANK</td>
+                            <td>GHC <%= Cobl%></td>
+                            <td>GHC <%= Cecas%></td>
+                            <td>GHC <%= Ctfa%></td>
+                            <td>GHC <%= Ccbl%></td>
+                            <td>GHC <%= spcbl%></td>
+                        </tr>
+                        <tr>
+                            <td>MTN MOMO</td>
+                            <td>GHC <%= Mobcl%></td>
+                            <td>GHC <%= Ecash%></td>
+                            <td>GHC <%= Mtfa%></td>
+                            <td>GHC <%= Mcbl%></td>
+                            <td>GHC <%= spmbl%></td>
+                        </tr>
+                        <tr>
+                            <td>FIDELITY</td>
+                            <td>GHC <%= Fobl%></td>
+                            <td>GHC <%= Fecas%></td>
+                            <td>GHC <%= Ftfa%></td>
+                            <td>GHC <%= Fcbl%></td>
+                            <td>GHC <%= spfbl%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">SUPERUSER ACCOUNT BALANCING FOR INDIVIDUAL ECOBANK ACCOUNTS</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>ACCOUNTS</th>
+                            <th>OPENING BALANCE</th>
+                            <th>E-CASH COLLECTED</th>
+                            <th>TOTAL ENTRIES</th>
+                            <th>CASH-OUT</th>
+                            <th>CLOSING BALANCE</th>
+                            <th>FINAL BALANCING</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ECOBANK 54</td>
+                            <td>GHC <%= E1obl%></td>
+                            <td>GHC <%= E1cas%></td>
+                            <td>GHC <%= E1tfa%></td>
+                            <td>GHC <%= E1ot%></td>
+                            <td>GHC <%= E1cbl%></td>
+                            <td>GHC <%= se1bl%></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 20</td>
+                            <td>GHC <%= E2obl%></td>
+                            <td>GHC <%= E2cas%></td>
+                            <td>GHC <%= E2tfa%></td>
+                            <td>GHC <%= E2ot%></td>
+                            <td>GHC <%= E2cbl%></td>
+                            <td>GHC <%= se2bl%></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 10</td>
+                            <td>GHC <%= E3obl%></td>
+                            <td>GHC <%= E3cas%></td>
+                            <td>GHC <%= E3tfa%></td>
+                            <td>GHC <%= E3ot%></td>
+                            <td>GHC <%= E3cbl%></td>
+                            <td>GHC <%= se3bl%></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 80</td>
+                            <td>GHC <%= E4obl%></td>
+                            <td>GHC <%= E4cas%></td>
+                            <td>GHC <%= E4tfa%></td>
+                            <td>GHC <%= E4ot%></td>
+                            <td>GHC <%= E4cbl%></td>
+                            <td>GHC <%= se4bl%></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tell-disp1">INTERBANK TRANSACTIONS</p>
+                <table class="final-table">
+                    <thead>
+                        <tr>
+                            <th>ACCOUNT</th>
+                            <th>AMOUNT</th>
+                            <th>COMMISSION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsTable">
+                        <tr>
+                            <td>ECOBANK 54</td>
+                            <td>GHC <%= accountSummary[54].Amount %></td>
+                            <td>GHC <%= accountSummary[54].Commission %></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 20</td>
+                            <td>GHC <%= accountSummary[20].Amount %></td>
+                            <td>GHC <%= accountSummary[20].Commission %></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 10</td>
+                            <td>GHC <%= accountSummary[10].Amount %></td>
+                            <td>GHC <%= accountSummary[10].Commission %></td>
+                        </tr>
+                        <tr>
+                            <td>ECOBANK 80</td>
+                            <td>GHC <%= accountSummary[80].Amount %></td>
+                            <td>GHC <%= accountSummary[80].Commission %></td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>TOTAL</td>
+                            <td>GHC <%= accountSummary.Total.Amount %></td>
+                            <td>GHC <%= accountSummary.Total.Commission %></td>
+                        </tr>
+                    </tbody>
+                </table>                
+                <p class="tell-disp1">OVERALL SUPERUSER TRANSACTIONS</p>
+                <h3>TOTAL MTN MOMO DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= Mtfa%></p>
+                <h3>TOTAL OTHER MTN MOMO DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= omtn%></p>
+                <h3>TOTAL MTN MOMO CHARGES</h3>
+                <p class="vip">Amount: GHC <%= mct%></p>
+                <h3>TOTAL ECOBANK DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= TEtfa%></p>
+                <h3>TOTAL OTHER ECOBANK DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= OtEc%></p>
+                <h3>TOTAL ECOBANK CASHOUT</h3>
+                <p class="vip">Amount: GHC <%= ETot%></p>
+                <h3>TOTAL CALBANK DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= Ctfa%></p>
+                <h3>TOTAL FIDELITY DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= Ftfa%></p>
+                <h3>TOTAL FIDELITY WITHDRAWALS</h3>
+                <p class="vip">Amount: GHC <%= FidWd%></p>
+                <h3>TOTAL OTHER BANKS DEPOSITS</h3>
+                <p class="vip">Amount: GHC <%= sttb%></p>
+                <button type="button" onclick="close1()">Close</button>
+            </form>
+        </div>
+        <div id="mcb-form" class="popup-form">
+            <h2 class="form-title">MOMO CHARGES</h2>
+            <table id="g">
+                <thead>
+                    <tr>
+                        <th>TELLLER AND BRANCH</th>
+                        <th>AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AIYINASE T1</td>
+                        <td>GHC <%= mcA1%></td>
+                    </tr>
+                    <tr>
+                        <td>AIYINASE T2</td>
+                        <td>GHC <%= mcA2%></td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO T1</td>
+                        <td>GHC <%= mcB1%></td>
+                    </tr>
+                    <tr>
+                        <td>BOGOSO T2</td>
+                        <td>GHC <%= mcB2%></td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA T1</td>
+                        <td>GHC <%= mcP1%></td>
+                    </tr>
+                    <tr>
+                        <td>PRESTEA T2</td>
+                        <td>GHC <%= mcP2%></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+    </div>
+    <script src="src/otherpages.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

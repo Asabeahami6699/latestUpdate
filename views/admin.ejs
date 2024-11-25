@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="https://kit.fontawesome.com/25ed6cac66.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/src/admin.css">
+        <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+        <title>Administrator Panel</title>
+    </head>
+    <body>
+        <div class="mini-body">
+            <div class="hamburger" id="hamburger">☰ Menu</div>
+            <div class="content" id="content">
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('pages')">
+                    <i class="fa fa-eye"></i>Other Pages</button>
+                    <div id="pages" class="submenu">
+                        <a href="/Deposits">Tellers Deposit</a>
+                        <a href="/Withdrawals">Tellers Withdrawal</a>
+                        <a href="/superuser2">Superuser / Proccessor</a>
+                        <a href="/accountant">Accountant</a>
+                        <a href="/operational">Operations</a>
+                        <a href="/all-cs-personnels">Costumer Service</a>
+                        <a href="/company-overall-balancing">Company's Balancing Page</a>
+                    </div>
+                </div>
+    
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('user-management')">
+                    <i class="fa fa-users"></i> Users Management</button>
+                    <div id="user-management" class="submenu">
+                        <button class="btn1" onclick="viewUsers()">View Number Users</button>
+                        <button class="btn1" onclick="UserMgt('AddUser')">Add a User</button>
+                        <button class="btn1" onclick="UserMgt('AddTeller')">Add a Teller</button>
+                        <button class="btn1" onclick="UserMgt('UserDeletion')">Delete a User / Teller</button>
+                        <button class="btn1" onclick="UserMgt('PasscodeRst')">Reset User / Teller Password</button>
+                    </div>
+                </div>
+    
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('transaction-modification')">
+                    <i class="fa fa-pen"></i>Modify Transaction</button>
+                    <div id="transaction-modification" class="submenu">
+                        <button class="btn1" onclick="UserMgt('deleteDocs-form')">Deletion</button>
+                    </div>
+                </div>
+    
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('transaction-inputs')">
+                    <i class="fa fa-keyboard"></i> Transaction Inputs</button>
+                    <div id="transaction-inputs" class="submenu">
+                        <button class="btn1" onclick="UserMgt('AdminTrans')">Ecash Inputs</button>
+                    </div>
+                </div>
+    
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('download-documents')">
+                    <i class="fa fa-download"></i> Download Documents</button>
+                    <div id="download-documents" class="submenu">
+                        <button class="btn1" onclick="UserMgt('Tdlop')">Tellers Documents</button>
+                        <button class="btn1" onclick="UserMgt('XportAllDocs-form3')">Superuser Documents</button>
+                        <button class="btn1" onclick="UserMgt('XportAllDocs-form4')">Accountant Documents</button>
+                        <button class="btn1" onclick="UserMgt('XportAllDocs-form2')">Customer Service Documents</button>
+                    </div>
+                </div>
+    
+                <div class="menu-item">
+                    <button class="menu-button" onclick="toggleMenu('my-Account')">
+                    <i class="fa fa-right-from-bracket"></i> My Account</button>
+                    <div id="my-Account" class="submenu">
+                        <form id="log" action="/logout?_method=DELETE" method="POST">
+                            <button class="btn1" type="submit">Log Out</button>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+            <div class="inner" id="inner">
+                <h4>TELLERS BALANCING FORMS</h4>
+                <button onclick="UserMgt('AT1balance')" >
+                    <i class="fa fa-balance-scale"></i> Aiyinase Teller 1</button>
+                <button onclick="UserMgt('AT2balance')" >
+                    <i class="fa fa-balance-scale"></i> Aiyinase Teller 2</button>
+                <button onclick="UserMgt('BT1balance')" >
+                    <i class="fa fa-balance-scale"></i> Bogoso Teller 1</button>
+                <button onclick="UserMgt('BT2balance')" >
+                    <i class="fa fa-balance-scale"></i> Bogoso Teller 2</button>
+                <button onclick="UserMgt('PT1balance')" >
+                    <i class="fa fa-balance-scale"></i> Prestea Teller 1</button>
+                <button onclick="UserMgt('PT2balance')" >
+                <i class="fa fa-balance-scale"></i> Prestea Teller 2</button>
+    
+                <h4>TELLERS OVERALL TRANSACTION OVERVIEW FORMS</h4>
+                <button onclick="UserMgt('viewTT')" >
+                    <i class="fa fa-hand-holding-usd"></i> Deposit Transactions</button>
+                <button onclick="UserMgt('viewTW')" >
+                <i class="fa fa-money-bill-wave"></i> Withdrawal Transactions</button>
+            </div>
+        </div>
+        <div id="overlay">
+            <div id="AddTeller" class="popup-form" >
+                <h2>Teller's Registration Form</h2>
+                <form id="UserRegisteration" action="/UserRegisteration" method="post">
+                    <label>The username</label>
+                    <input type="text" name="name" id="username" placeholder="Enter The Username" required>
+                    <label style="display:none;">User type</label>
+                    <select id="user-type" style="display:none;" name="usertype" required>
+                        <option value="Teller" selected>Teller</option>
+                    </select>
+                    <label>Select branch</label>
+                    <select id="branch" name="branch" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="Aiyinase">Aiyinase</option>
+                        <option value="Prestea">Prestea</option>
+                        <option value="Bogoso">Bogoso</option>
+                    </select>
+                    <label>Select teller type</label>
+                    <select id="Teller-type" name="tellertype" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="Teller-1">Teller-1</option>
+                        <option value="Teller-2">Teller-2</option>
+                    </select>
+                    <label>The password</label>
+                    <input type="password" name="Password" id="password" placeholder="Enter The Password" required>
+                    <p id="errm1" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="confirRegis1()" >Next</button>  
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="AddUser" class="popup-form">
+                <h2>User Registration Form</h2>
+                <form id="UserRegisteration2" action="/UserRegisteration2" method="post">
+                    <label for="user-ty2">Select user type:</label>
+                    <select id="user-type2" name="usertype" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Superuser">Superuser</option>
+                        <option value="Accountant">Accountant</option>
+                        <option value="Invites">Special Invite</option>
+                        <option value="Operational">Operational</option>
+                        <option value="Costumer Service">Costumer Service</option>
+                    </select>
+                    <label>The branch</label>
+                    <select id="Userbranch"  name="branch" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="No-branch">None</option>
+                        <option value="Aiyinase">Aiyinase</option>
+                        <option value="Prestea">Prestea</option>
+                        <option value="Bogoso">Bogoso</option>
+                    </select>
+                    <label>The username</label>
+                    <input type="text" name="name" id="username" placeholder="Enter Username Here" required>
+                    <label style="display:none;">The teller type</label>
+                    <select id="Teller-type" style="display:none;" name="tellertype" required>
+                        <option value="No-type" selected>None</option>
+                    </select>
+                    <label>The password</label>
+                    <input type="password" name="Password" id="password" placeholder="Enter Password here" required>
+                    <p id="errm2" class="error" style="display:none;">Please all fields are required!!</p>
+                 <button type="button"  onclick="confirRegis2()">Next</button>  
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="UserDeletion" class="popup-form">
+                <h2>User Deletion Form</h2>
+                <form action="/DeleteUser" method="post" id="UserDelete">
+                    <p id="errm3" class="error" style="display:none;">The username to delete is required!!</p>
+                    <label>Enter the username</label>
+                    <input type="name" name="Username" id="username" placeholder="Enter The Username To Delete From The System" required>
+                    <button type="button"  onclick="confirDel()">Next</button>  
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="PasscodeRst" class="popup-form">
+                <h2>User Password Reset Form</h2>
+                <form action="/userPsdReset" method="post" id="UPsdRst">
+                    <label>The Username</label>
+                    <input type="name" name="Username" id="username" placeholder="Enter The Username On The System" required>
+                    <label>New password</label>
+                    <input type="password" name="Password" id="password" placeholder="Enter New Password Here" required>
+                    <label>Confirm new password</label>
+                    <input type="password" name="confirPassword" id="password" placeholder="Confirm New Password Here" required>
+                    <p id="errm4" class="error" style="display:none;"></p>
+                    <button type="button"  onclick="confirResetPsd()">Next</button>  
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirUserPsdRst" class="popup-form" style="display: none;">
+                <h2>Confirm User Password Reset Details</h1>
+                <p class="con-txt">Username: <span class="notes" id="confirps-username"></span></p>
+                <button type="button"  onclick="submit4()">Confirm</button>
+                <button type="button"  onclick="Back4()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmRegistration1" class="popup-form" style="display: none;">
+                <h2>Confirm Teller's Registration Details</h1>
+                <p class="con-txt">Username: <span class="notes" id="confirm1-username"></span></p>
+                <p class="con-txt">Branch: <span class="notes" id="confirm1-branch"></span></p>
+                <p class="con-txt">Teller Type: <span class="notes" id="confirm1-teller-type"></span></p>
+                <button type="button"  onclick="submit1()">Confirm</button>
+                <button type="button"  onclick="Back1()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmRegistration2" class="popup-form" style="display: none;">
+                <h2>Confirm Registration Details</h2>
+                <p class="con-txt">Username: <span class="notes" id="confirm2-username"></span></p>
+                <p class="con-txt">User Type: <span class="notes" id="confirm2-userty"></span></p>
+                <p class="con-txt">Branch: <span class="notes" id="confirm2-brnchty"></span></p>
+                <button type="button"  onclick="submit2()">Confirm</button>
+                <button type="button"  onclick="Back2()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirmDelt" class="popup-form" style="display: none;">
+                <h2>Confirm The Name To Delete</h2>
+                <p class="con-txt">Username: <span class="notes" id="confirm3-username"></span></p>
+                <button type="button"  onclick="submit3()">Confirm & Delete</button>
+                <button type="button"  onclick="Back3()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div class="popup-form" id="viewTT">
+                <h2>All Tellers Total Deposits Transaction Menu</h2>
+                <form >
+                 <h3>Total MTN Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttmd%></p>
+                 <h3>Total Vodafone Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttvd%></p>
+                 <h3>Total Susu Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttsd%></p>
+                 <h3>Total Ecobank Deposit</h3>
+                 <p class="vip">Amount: GHC <%= tted%></p>
+                 <h3>Total Fidelity Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttfd%></p>
+                 <h3>Total Calbank Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttcd%></p>
+                 <h3>Total Other Banks Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttod%></p>
+                 <h3>All Tellers Total Initial Physical Cash</h3>
+                 <p class="vip">Amount: GHC <%= ttin%></p>
+                 <h3>All Tellers Total Customers</h3>
+                 <p class="vip"> Number: <%= ttdc%></p>
+                 <h3>All Tellers Total Physical Cash Collected</h3>
+                 <p class="vip">Amount: GHC <%= ttcc%></p>
+                 <h3>All Tellers Total Amount Deposit</h3>
+                 <p class="vip">Amount: GHC <%= ttaf%></p>
+                 <h3>All Tellers Actual Deposit Cash</h3>
+                 <p class="vip">Amount: GHC <%= ttdp%></p>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div class="popup-form" id="viewTW">
+                <h2>All Tellers Total Withdrawals Transaction Menu</h2>
+                <form >
+                 <h3>Total MTN Withdrawal</h3>
+                 <p class="vip">Amount: GHC <%= ttmw%></p>
+                 <h3>Total Vodafone Withdrawal</h3>
+                 <p class="vip">Amount: GHC <%= ttvw%></p>
+                 <h3>Total Susu Withdrawal</h3>
+                 <p class="vip">Amount: GHC <%= ttsw%></p>
+                 <h3>Total Ecobank Withdrawal</h3>
+                 <p class="vip">Amount: GHC <%= ttew%></p>
+                 <h3>Total G-Money</h3>
+                 <p class="vip">Amount: GHC <%= ttgw%></p>
+                 <h3>Total ATM</h3>
+                 <p class="vip">Amount: GHC <%= ttaw%></p>
+                 <h3>Total E-Zwich</h3>
+                 <p class="vip">Amount: GHC <%= ttezw%></p>
+                 <h3>Total Remittance</h3>
+                 <p class="vip">Amount: GHC <%= ttrw%></p>
+                 <h3>All Tellers Total Cash To Bank</h3>
+                 <p class="vip">Amount: GHC <%= ttcb%></p>
+                 <h3>All Tellers Total Withdrawals Customers</h3>
+                 <p class="vip"> Number: <%= ttwc%></p>
+                 <h3>All Tellers Total Physical Cash Remaining</h3>
+                 <p class="vip">Amount: GHC <%= ttcr%></p>
+                 <h3>All Tellers Total Amount Withdrew</h3>
+                 <p class="vip">Amount: GHC <%= ttatw%></p>
+                 <h3>All Tellers Total Expenses</h3>
+                 <p class="vip">Amount: GHC <%= texp%></p>
+                 <h3>All Tellers Total Commission</h3>
+                 <p class="vip">Amount: GHC <%= tcom%></p>
+                 <h3>All Tellers Actual Amount Withdrew</h3>
+                 <p class="vip">Amount: GHC <%= ttact%></p>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div class="popup-form" id="Tdlop">
+                <h2>To Download Tellers Documents</h2>
+                <form >
+                    <h3>Click On This Link To Download Tellers Deposits or Withdrawals Documents:
+                        <a href="/Withdrawals">Click Here!</a>
+                    </h3>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="XportAllDocs-form1" class="popup-form">
+                <h2>Download All Transactions Documents(Withdrawal)</h2>
+                <form>
+                    <label for="Branch-type">Branch Type:</label>
+                    <select id="branch" name="branch" required>
+                        <option value="" disabled selected hidden>Select An Option</option>
+                        <option value="Aiyinase">Aiyinase</option>
+                        <option value="Prestea">Prestea</option>
+                        <option value="Bogoso">Bogoso</option>
+                    </select>
+                    <label for="Teller-type">Teller Type:</label>
+                    <select id="Teller-type" name="tellertype" required>
+                        <option value="" disabled selected hidden>Select An Option</option>
+                        <option value="Teller-1">Teller-1</option>
+                        <option value="Teller-2">Teller-2</option>
+                    </select>
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>                
+                    <button type="button" >Download Withdrawal Data</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="XportAllDocs-form2" class="popup-form">
+                <h2>Download Customer Service Personnels Documents</h2>
+                <form>
+                    <h3>Click On This Link To Download Customer Service Personnels Documents:
+                        <a href="/all-cs-personnels">Click Here!</a>
+                    </h3>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="XportAllDocs-form3" class="popup-form">
+                <h2>Download Superuser Data</h2>
+                <form>
+                    <h3>Click On This Link To Download Superuser Documents:
+                        <a href="/superuser2">Click Here!</a>
+                    </h3>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="XportAllDocs-form4" class="popup-form">
+                <h2>Download Accountant Data</h2>
+                <form>
+                    <h3>Click On This Link To Download Accountant Documents:
+                        <a href="/accountant">Click Here!</a>
+                    </h3>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="deleteDocs-form" class="popup-form">
+                <h2>Choose an Option to Delete</h2>
+                <form >
+                    <button type="button" onclick="delBtn('BMSdelete-form')">Teller Deposit</button>
+                    <button type="button" onclick="delBtn('OtherWithdlsDel-form')">Teller Withdrawal</button>
+                    <button type="button" onclick="delBtn('UIdelete-form')">Teller Input</button>
+                    <button type="button" onclick="delBtn('csdelete-form')">Customer Service Data</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="BMSdelete-form" class="popup-form">
+                <h2>Deposit Transaction Deletion Form</h2>
+                <form id="susuTransForm" action="/DeleteDoc1" method="post">
+                    <label for="Transaction-type">Deposit type:</label>
+                    <select id="Transaction-type" name="Transaction" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="ecobank">Ecobank</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                        <option value="Calbank">Calbank</option>
+                        <option value="Other Banks">Other Banks</option>
+                        <option value="mtn">MTN (MoMo)</option>
+                        <option value="Voda">Vodafone (MoMo)</option>
+                        <option value="susu">Susu</option>
+                    </select>
+                    <label for="name">Transaction ID:</label>
+                    <input type="text" name="transID1" placeholder="Enter the Transaction ID" required>
+                    <p id="filldelsms" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="deleteBMSConfir()">Preview Inputs</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="Delete-form1" class="popup-form">
+                <h2>Confirm Transaction To Delete</h2>
+                <p class="con-txt">Deposit type:<span id="confir-DTrtyp1" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Transaction ID:<span id="confir-Damt1" class="notes" style="text-decoration: underline;"></span></p>
+                <button type="button" onclick="confirSubmitDel1()">Confirm & Delete</button>
+                <button type="button" onclick="BackD1()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="OtherWithdlsDel-form" class="popup-form">
+                <h2>Withdrawal Transaction Deletion Form</h2>
+                <form id="otherWithDel" action="/deleteOtherWithdrawal" method="post">
+                    <label for="withdrawal-type">Withdrawal type:</label>
+                    <select id="withdrawal-del" name="withdrawalType" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="G-Money">G-Money</option>
+                        <option value="ATM">ATM</option>
+                        <option value="Ezwich">Ezwich</option>
+                        <option value="Remittances">Remittances</option>
+                        <option value="ecobank">Ecobank</option>
+                        <option value="mtn">MTN (MoMo)</option>
+                        <option value="Voda">Vodafone (MoMo)</option>
+                        <option value="susu">Susu</option>
+                    </select>
+                    <label for="name">Transaction ID:</label>
+                    <input type="text" name="transID2" placeholder="Enter the Transaction ID" required>
+                    <p id="deleteSms2" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="showOtherWithdDelForm()">Preview Inputs</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confirDel-form" class="popup-form">
+                <h2>Confirm Transaction To Delete</h2>
+                <p class="con-txt">Withdrawal type: <span id="confirm-withd-del" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Transaction ID: <span id="confirm-name-del" class="notes" style="text-decoration: underline;"></span></p>
+                <button type="button" onclick="submitOtherWithdDelete()">Confirm & Delete</button>
+                <button type="button" onclick="BackodD()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="UIdelete-form" class="popup-form">
+                <h2>Teller (User) Input Deletion Form</h2>
+                <form id="userInputType" action="/deleteUserInput" method="post">
+                    <label for="Transaction-type">Teller input type:</label>
+                    <select id="userInput-type" name="userInput" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Initial Physical Cash">Initial Pcash</option>
+                        <option value="Physical Cash Collected">Pcash Collected</option>
+                        <option value="Expenses">Expenses</option>
+                        <option value="Cash To Bank">Cash To Bank</option>
+                        <option value="Physical Cash Remaining">Physical Cash Remaining</option>
+                    </select>
+                    <label for="amount">Transaction ID:</label>
+                    <input type="text"  name="InpID" placeholder="Enter the Transaction ID" required>
+                    <p id="filldelsms2" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="UserIpConfir()">Preview Inputs</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confIpDel-form" class="popup-form">
+                <h2>Confirm Deletion Inputs</h2>
+                <p class="con-txt">Teller input type:<span id="confir-Ip2" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Transaction ID: <span id="confir-Ip3" class="notes" style="text-decoration: underline;"></span></p>
+                <button type="button" onclick="UserIpSubmit()">Confirm & Delete</button>
+                <button type="button" onclick="BackIp()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="csdelete-form" class="popup-form">
+                <h2>Customer Service Input Deletion Form</h2>
+                <form id="csInputType" action="/deleteCSInput" method="post">
+                    <label for="Transaction-type">Input type:</label>
+                    <select id="csInput-type" name="csInput" required>
+                        <option value="choose" disabled selected hidden>Select An Option</option>
+                        <option value="Ecobank Withdrawal">Ecobank Withdrawal</option>
+                        <option value="Express Account Created">Express Account Created</option>
+                    </select>
+                    <label for="ID">Transaction ID:</label>
+                    <input type="text"  name="csID" placeholder="Enter the Transaction ID" required>
+                    <p id="filldelsms3" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="CsIpConfir()">Preview Inputs</button>
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confCsDel-form" class="popup-form">
+                <h2>Confirm Deletion Inputs</h2>
+                <p class="con-txt">Input type:<span id="confir-cs2" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Transaction ID: <span id="confir-cs3" class="notes" style="text-decoration: underline;"></span></p>
+                <button type="button" onclick="CsIpSubmit()">Confirm & Delete</button>
+                <button type="button" onclick="BackCs()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="AdminTrans" class="popup-form" >
+                <h2>Ecash Sent Form</h2>
+                <form id="TransByAdmin" action="/" method="post">
+                    <label>Receiver</label>
+                    <select id="Receiver" name="Receiver" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="Superuser">Superuser</option>
+                        <option value="Operational">Operational</option>
+                    </select>
+                    <label>Transaction type</label>
+                    <select id="tsac" name="TTtpe" required>
+                        <option value="null" disabled selected hidden>Select An Option</option>
+                        <option value="Ecobank 54">Ecobank 54</option>
+                        <option value="Ecobank 20">Ecobank 20</option>
+                        <option value="Ecobank 10">Ecobank 10</option>
+                        <option value="Ecobank 80">Ecobank 80</option>
+                        <option value="MoMo(MTN)">MoMo(MTN)</option>
+                        <option value="Fidelity">Fidelity</option>
+                        <option value="Calbank">Calbank</option>
+                        <option value="InterBanks">InterBanks</option>
+                    </select>
+                    <label>The amount</label>
+                    <input type="number" name="amount" id="tsacamount" placeholder="Enter The Amount" required>
+                    <p id="errmAdtrans" class="error" style="display:none;">Please all fields are required!!</p>
+                    <button type="button" onclick="confAdmints()" >Next</button>  
+                </form>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="confAdEcash-form" class="popup-form">
+                <h2>Confirm Inputs</h2>
+                <p class="con-txt">Receiver: <span id="confir-ecashR" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Transaction type: <span id="confir-ecashTT" class="notes" style="text-decoration: underline;"></span></p>
+                <p class="con-txt">Amount: <span id="confir-ecashA" class="notes" style="text-decoration: underline;"></span></p>
+                <button type="button" >Confirm and Submit</button>
+                <button type="button" onclick="BackEc()">Back</button>
+                <hr>
+                <button type="button" onclick="hideForm()">Close</button>
+            </div>
+            <div id="AT1balance" class="popup-form">
+                <h2>Aiyinase Teller 1: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= a1acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= AT1TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= A1AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= a1bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="AT2balance" class="popup-form">
+                <h2>Aiyinase Teller 2: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= a2acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= AT2TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= A2AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= a2bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="BT1balance" class="popup-form">
+                <h2>Bogoso Teller 1: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= b1acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= BT1TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= B1AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= b1bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="BT2balance" class="popup-form">
+                <h2>Bogoso Teller 2: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= b2acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= BT2TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= B2AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= b2bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="PT1balance" class="popup-form">
+                <h2>Prestea Teller 1: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= p1acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= PT1TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= P1AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= p1bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <div id="PT2balance" class="popup-form">
+                <h2>Prestea Teller 2: Today's Transactions Balance</h2>
+                <h3 class="tot">Today's Total Costumers For All Transactions :</h3>
+                <h3 class="tot3"><%= p2acos%></h3>
+            
+                <h3 class="tot">Actual Amount Transfered (Deposits) :</h3>
+                <h3 class="tot2">GHC <%= PT2TTotalcPcash%></h3> 
+
+                <h3 class="tot">Actual Amount Withdrew (Withdrawals) :</h3>
+                <h3 class="tot2">GHC <%= P2AW%></h3>
+                
+                <h3 class="tot">FINAL BALANCE :</h3>
+                <h3 class="tot1">GHC <%= p2bl%></h3>
+                <hr> 
+                <button type="button" onclick="hideForm()">Close</button> 
+            </div>
+            <span id="loader" class="loader"></span>
+            <div id="failureM-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-error.gif" >
+                    <div>Username Already Exist !</div>
+                </div>
+            </div>
+            <div id="successful-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/Animation-check-new.gif">
+                    <div>User Is Added Successfully</div>
+                </div>
+            </div>
+            <div id="successful-smsPR" class="pixal">
+                <div>
+                    <img src="imgs and icons/Animation-check-new.gif">
+                    <div>Password Reset successfully</div>
+                </div>
+            </div>
+            <div id="failure-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-wrong.gif" >
+                    <div id="fail-txt">Error Occurred While Processing Request, Please Try Again !</div>
+                </div>
+            </div>    
+            <div id="successD-sms-delS" class="pixal">
+                <div>
+                    <img src="imgs and icons/Animation-Trash-2.gif">
+                    <div id="success-txt">User Is Deleted Successfully</div>
+                </div>
+            </div>
+            <div id="failure-sms-delE" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-error.gif" >
+                    <div id="unexist-txt">User Does Not Exist !</div>
+                </div>
+            </div>
+            <div id="failureTx-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-error.gif" >
+                    <div>Teller Already Exist !</div>
+                </div>
+            </div>
+            <div id="failureU-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-error.gif" >
+                    <div>User Type Exist !</div>
+                </div>
+            </div>
+            <div id="failureCS-sms" class="pixal">
+                <div>
+                    <img src="imgs and icons/icons8-error.gif" >
+                    <div>Customer Service Personnel With The Same Branch Already Exist !</div>
+                </div>
+            </div>
+        </div>
+        <script src="\src\admin.js"></script>
+        <script src="src/inactivityTimer.js"></script>
+    </body>
+</html>

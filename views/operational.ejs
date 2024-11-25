@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations</title>
+    <link rel="icon" href="fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/src/operation.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+    
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/operational" class="navbar-logo">Operations</a>
+        <div class="container-a">
+            <% if (usertype === "Operational") { %>
+                <ul class="navbar-menu">
+                    <li><a onclick="showPopup('operationsPopupForm')">Transaction</a></li>
+                    <li><a onclick="showPopup('operationsPopupForm2')">Ecash Input</a></li>
+                    <li><a onclick="showPopup('operationsPopupForm3')">Deletion</a></li>
+                    <li><a href="/company-overall-balancing">Overall Page</a></li>
+                </ul>
+            <% } %>
+        </div>
+        <div class="nav-list">
+            <% if (usertype === "Operational") { %>
+                <form action="/logout?_method=DELETE" method="POST">
+                    <button type="submit">Log Out</button>
+                </form>
+            <% } %>
+        </div>
+    </nav>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="card">
+                <h3>Total Customers</h3>
+                <p><%= opt1Dc %></p>
+            </div>
+            <div class="card">
+                <h3>Total Amount</h3>
+                <p>GHC <%= opt1Am %></p>
+            </div>
+            <div class="card1">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ecash Received</th>
+                            <th>Total Entries</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GHC <%= optEcash %></td>
+                            <td>GHC <%= opt1Am %></td>
+                            <td>GHC <%= optBalancing %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="wrapper">
+            <div class="container-gradient">
+                <div class="filter-container">
+                    <h4>Choose date range</h4>
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate" class="date-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate" class="date-input" required>
+                    </div>
+                    <button id="applyFilter" class="filter-button">Apply Filter</button>
+                </div>
+        
+                <div class="container">
+                    <div class="main-content">
+                        <!-- Download Link -->
+                        <div class="download-container">
+                            <button class="download-link" onclick="downloadCSV()">
+                                Download <i id="dlImg" class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <table id="transactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>Branch</th>
+                                    <th>Bank Type</th>
+                                    <th>Beneficiary Name</th>
+                                    <th>Amount</th>
+                                    <th>Transaction ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <div id="overlay">
+                        <span class="loader" id="loading"></span>
+        
+                        <div id="failure-sms" class="pixal">
+                            <div>
+                                <img src="imgs and icons/icons8-wrong.gif" alt="Error">
+                                <div>Error Occurred While Processing Request, Please Try Again !</div>
+                            </div>
+                        </div>
+        
+                        <div id="successful-sms" class="pixal">
+                            <div>
+                                <img src="imgs and icons/Animation-check-new.gif" alt="Success">
+                                <div id="success-txt">The Record is successfully Saved!</div>
+                            </div>
+                        </div>
+
+                        <div id="successD-sms-delS" class="pixal">
+                            <div>
+                                <img src="imgs and icons/Animation-Trash-2.gif">
+                                <div>Document Is Deleted Successfully</div>
+                            </div>
+                        </div>
+        
+                        <div id="failure-sms-delE" class="pixal">
+                            <div>
+                                <img src="imgs and icons/icons8-error.gif" >
+                                <div>Document Does Not Exist !</div>
+                            </div>
+                        </div>
+        
+                        <div class="popup-form" id="operationsPopupForm">
+                            <h2>InterBank Transaction</h2>
+                            <form id="Interbank-Form" action="/operationalTransc" method="post">
+                                <div class="form-row">
+                                    <label for="branch">Branch:</label>
+                                    <select id="branch" name="branch" required>
+                                        <option value="" disabled selected>Select Branch</option>
+                                        <option value="Aiyinasi">Aiyinasi</option>
+                                        <option value="Prestea">Prestea</option>
+                                        <option value="Bogoso">Bogoso</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <label for="banktype">Bank Type:</label>
+                                    <input type="text" id="banktype" name="banktype" placeholder="Enter Bank Type" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="beneficiary">Beneficiary Name:</label>
+                                    <input type="text" id="beneficiary" name="beneficiary" placeholder="Enter Beneficiary Name" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="slipnumber">Slip Number:</label>
+                                    <input type="number" id="slipnumber" name="slipnumber" placeholder="Enter Slip Number" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="amount">Amount:</label>
+                                    <input type="number" id="amount" name="amount" step="any" placeholder="Enter Amount" required>
+                                </div>
+                                <p id="err" class="error" style="display:none;">Please all fields are required!!</p>
+                                <div class="form-controls">
+                                    <div class="button-container">
+                                        <button type="button" onclick="closePopup('operationsPopupForm')">Cancel</button>
+                                        <button type="button" onclick="previewData()">Preview</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="popup-form" id="operationsPopupForm2">
+                            <h2>Ecash Input Form</h2>
+                            <form id="Interbank-Ecash">
+                                <div class="form-row">
+                                    <label for="amount">Amount:</label>
+                                    <input type="number" id="amountEcash" name="amount" step="any" placeholder="Enter Amount" required>
+                                </div>
+                                <p id="err2" class="error" style="display:none;">Please all fields are required!!</p>
+                                <div class="form-controls">
+                                    <div class="button-container">
+                                        <button type="button" onclick="closePopup('operationsPopupForm2')">Cancel</button>
+                                        <button type="button" onclick="previewEcash()">Preview</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="preview-modal" id="operationsPreview2">
+                            <h2>Confirm Ecash</h2>
+                            <p class="con-txt"><strong>Ecash Amount:</strong> <span class="conf-txt" id="previewEcash"></span></p>
+                            <div class="form-controls">
+                                <div class="button-container">
+                                    <button type="button" onclick="backToForm2()">Back</button>
+                                    <button type="button" onclick="submitData2()">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="popup-form" id="operationsPopupForm3">
+                            <h2>Transaction Deletion Form</h2>
+                            <form id="Interbank-Delete">
+                                <div class="form-row">
+                                    <label for="amount">Transaction ID:</label>
+                                    <input type="text" id="IDdelt" name="delID"  placeholder="Enter Transaction ID Here" required>
+                                </div>
+                                <p id="err3" class="error" style="display:none;">Please all fields are required!!</p>
+                                <div class="form-controls">
+                                    <div class="button-container">
+                                        <button type="button" onclick="closePopup('operationsPopupForm3')">Cancel</button>
+                                        <button type="button" onclick="previewDelt()">Preview</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="preview-modal" id="operationsPreview3">
+                            <h2>Confirm Transaction ID</h2>
+                            <p class="con-txt"><strong>Transaction ID:</strong> <span class="conf-txt" id="previewDelt1"></span></p>
+                            <div class="form-controls">
+                                <div class="button-container">
+                                    <button type="button" onclick="backToForm3()">Back</button>
+                                    <button type="button" onclick="submitData3()">Confirm & Delete</button>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="popup-form" id="dlPopupForm">
+                            <h2>Select Start and End Date</h2>
+                            <form id="dl-Form" action="/download-operational1" method="post">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" id="startDate" class="date-input" name="startDatedl" value="YYYY-MM-DD" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" id="endDate" class="date-input" name="endDatedl" value="YYYY-MM-DD" required>
+                                </div>
+                                <div class="form-controls">
+                                    <div class="button-container">
+                                        <button type="button" onclick="closePopup('dlPopupForm')">Cancel</button>
+                                        <button type="submit" >Download</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Confirmation Form -->
+                        <div class="preview-modal" id="operationsPreview">
+                            <h2>Confirm Entry</h2>
+                            <p class="con-txt"><strong>Branch:</strong> <span class="conf-txt" id="previewBranch"></span></p>
+                            <p class="con-txt"><strong>Bank Type:</strong> <span class="conf-txt" id="previewBankType"></span></p>
+                            <p class="con-txt"><strong>Beneficiary Name:</strong> <span class="conf-txt" id="previewBeneficiaryName"></span></p>
+                            <p class="con-txt"><strong>Slip Number:</strong> <span class="conf-txt" id="previewSlipNumber"></span></p>
+                            <p class="con-txt"><strong>Amount:</strong> <span class="conf-txt" id="previewAmount"></span></p>
+                            <div class="form-controls">
+                                <div class="button-container">
+                                    <button type="button" onclick="backToForm()">Back</button>
+                                    <button type="button" onclick="submitData()">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>               
+    </div>
+    <script src="\src\operation.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

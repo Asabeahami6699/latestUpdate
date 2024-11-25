@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= branch %> Customer Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/src/cservice.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+</head>
+<body>
+    <div id="wrapper">
+        <div class="welcome">
+            <h1>Hello, Welcome to Your Customer Service Panel.</h1>
+        </div>
+        <div class="Sub1">
+            <button onclick="openPopup('popup1')">
+                <i class="fa fa-folder"></i> My Services for Today
+            </button>
+            <button onclick="openPopup('popup2')">
+                <i class="fa fa-folder-open"></i> Tellers Ecobank Withdrawal Records
+            </button>
+            <button onclick="csbtn1('csForm2')">
+                <i class="fa fa-user-plus"></i> Create Express Account Record
+            </button>
+            <button onclick="csbtn1('csForm1')">
+                <i class="fa fa-plus"></i> Add Ecobank Withdrawal Record
+            </button>
+            <button onclick="csbtn1('choose')">
+                <i class="fa fa-download"></i> Download Records
+            </button>
+        </div>        
+        <button class="Sub2" onclick="csbtn1('quit')">
+            <i class="fa fa-right-from-bracket"></i> Sign Out
+        </button>        
+    </div>
+
+    <div class="user-info-container">
+        <div class="user-info-left">
+            <div class="icon-text">
+                <i class="fa fa-circle-user"></i>
+                <span>Personnel: <%= name %></span>
+            </div>
+        </div>
+        
+        <div class="user-info-right">
+            <div class="icon-text">
+                <i class="fa fa-location-dot"></i>
+                <span>Location: <%= branch %></span>
+            </div>
+        </div>
+    </div>       
+    
+    <div id="overlay">
+        <div id="csForm1" class="popup-form" >
+            <h2>Customer's Ecobank Withdrawal Form</h2>
+            <form id="csEWForm1" action="/csEcobankWithdls" method="post">
+                <label>Beneficiary Name:</label>
+                <input type="text" name="csname" id="name1" placeholder="Enter The Beneficiary Name Here" required>
+                <label>The Amount (numbers only):</label>
+                <input type="number" step="ANY" name="csamount" id="amount1" placeholder="Enter The Amount Here" required>
+                <p id="errm1" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="confirCS1()" >Next</button>  
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csConf-form1" class="popup-form">
+            <h2>Confirm Your Ecobank Withdrawal Details</h2>
+            <p class="con-txt">Name of Beneficiary: <span id="confir-name1" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <p class="con-txt">The Amount: <span id="confir-amount1" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <button type="button" onclick="csSubmit()">Confirm and Submit</button>
+            <hr>
+            <button type="button" onclick="csBK1()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div> 
+        <div id="csForm2" class="popup-form" >
+            <h2>Express Account Creation Form</h2>
+            <form id="csEACForm1" action="/csExpressCreation" method="post">
+                <label>Customer's Name:</label>
+                <input type="text" name="csname1" id="name1" placeholder="Enter The Customer Name Here" required>
+                <label for="amount">Customer's Contact:</label>
+                <input type="number" step="ANY" name="contact1" placeholder="Enter Customer Contact Here" required>
+                <label>Account Number:</label>
+                <input type="number" name="account1" id="account1" placeholder="Enter The Account Number Here" required>
+                <label>Email Address:</label>
+                <input type="email" name="email1" id="email1" placeholder="Enter The Email Address Here" required>
+                <label>Initial Deposit (numbers only):</label>
+                <input type="number" step="ANY" name="csamount1" id="amount1" placeholder="Enter The Amount Here" required>
+                <p id="errm2" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="confirCS2()" >Next</button>  
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csConf-form2" class="popup-form">
+            <h2>Confirm Customer's Express Account Details</h2>
+            <p class="con-txt">Customer's Name: <span id="confir-Cname2" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <p class="con-txt">Customer's Contact: <span id="confir-Ccont2" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <p class="con-txt">Account Number: <span id="confir-Anumb" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <p class="con-txt">Email Address: <span id="confir-Email" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <p class="con-txt">Initial Deposit: <span id="confir-amount2" class="notes" style="text-decoration: underline;"></span></p>
+            <hr>
+            <button type="button" onclick="csSubmit2()">Confirm and Submit</button>
+            <hr>
+            <button type="button" onclick="csBK2()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div> 
+        <div id="choose" class="popup-form">
+            <h2>Choose An Option To Download</h2>
+            <form>
+                <button type="button" onclick="csdownload('csDl1-form')">Download Express Accounts Created</button>
+                <hr>
+                <button type="button" onclick="csdownload('csDl2-form')">Download Ecobank Withdrawal</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csDl1-form" class="popup-form">
+            <h2>Download Express Accounts Created Data</h2>
+            <form action="/downloadcs1" method="post">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                <button type="submit" >Download</button>
+                <hr>
+                <button type="button" onclick="DBack('csDl1-form')">Back</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csDl2-form" class="popup-form">
+            <h2>Download Ecobank Withdrawal Data</h2>
+            <form action="/downloadcs2" method="post">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" value="YYYY-MM-DD" required>
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" value="YYYY-MM-DD" required>
+                <button type="submit" >Download</button>
+                <hr>
+                <button type="button" onclick="DBack('csDl2-form')">Back</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="quit" class="popup-form">
+            <h2>Do you want to log out?</h2>
+            <form action="/logout?_method=DELETE" method="POST">
+                <button  type="submit">Yes</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">No</button>
+        </div>
+        <span id="loading" class="loader"></span>
+        <div id="failure-sms" class="pixal">
+            <div>
+                <img src="imgs and icons/icons8-wrong.gif" >
+                <div>The Record is not Saved Due to an Error, Please Try Again !</div>
+            </div>
+        </div>
+        <div id="successful-sms" class="pixal">
+            <div>
+                <img src="imgs and icons/Animation-check-new.gif">
+                <div id="success-txt">The Record is successfully Saved !</div>
+            </div>
+        </div>
+
+        <div class="popup-container" id="popup1">
+            <button class="close-btn" onclick="closePopup('popup1')"><i class="fa fa-circle-xmark"></i></button>
+            <h2>Your Services Records For Today</h2>
+            <div class="accordion-content">
+                <p>Number of Recorded Customers for Express Account Created: <span class="span"><%= csd2 %></span></p>
+                <hr>
+                <p>Number of Recorded Customers for Ecobank Withdrawals: <span class="span"><%= csd1 %></span></p>
+                <hr>
+                <p>Total Amount for Ecobank Withdrawals: <span class="span">GHC <%= csamt1 %></span></p>
+            </div>
+        </div>
+    
+        <div class="popup-container" id="popup2">
+            <button class="close-btn" onclick="closePopup('popup2')"><i class="fa fa-circle-xmark"></i></button>
+            <h2><%= branch %> Tellers Ecobank Withdrawal Records</h2>
+            <div class="accordion-content">
+                <p><%= branch %> Teller 1 - Number of Customers for Ecobank Withdrawals: <span class="span"><%= cstdoc1 %></span></p>
+                <hr>
+                <p><%= branch %> Teller 2 - Number of Customers for Ecobank Withdrawals: <span class="span"><%= cstdoc2 %></span></p>
+                <hr>
+                <p>All <%= branch %> Tellers - Number of Customers for Ecobank Withdrawals: <span class="span"><%= cstdct %></span></p>
+                <hr>
+                <p><%= branch %> Teller 1 - Total Amount for Ecobank Withdrawals: <span class="span">GHC <%= csT1amt %></span></p>
+                <hr>
+                <p><%= branch %> Teller 2 - Total Amount for Ecobank Withdrawals: <span class="span">GHC <%= csT2amt %></span></p>
+                <hr>
+                <p>All <%= branch %> Tellers - Total Amount for Ecobank Withdrawals: <span class="span">GHC <%= cstatt %></span></p>
+            </div>
+        </div>
+    </div>
+    <script src="\src\cservice.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

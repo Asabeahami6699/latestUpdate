@@ -1,0 +1,422 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: rgb(41, 41, 41);
+    
+}
+
+.profile-container {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    display: inline-block;
+}
+
+.profile-name {
+    background-color: rgb(41, 41, 41);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.profile-name:hover {
+    background-color: #000000;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    transition: margin-left 0.3s ease;
+}
+
+.container-table {
+    margin-left: 20px; /* Account for the left sidebar width */
+    margin-right: 10px; /* Account for the right sidebar width */
+    margin-top: 20px;   /* Account for the top bar height */
+    padding: 20px;
+    overflow: auto;
+    height: 80%; /* Full height minus top bar */
+    max-width: auto;
+    background-color: #eeebeb;
+}
+
+.sidebar {
+    width: 200px; 
+    background-color: rgb(41, 41, 41);
+    color: white;
+    padding: 10px;
+    margin-top: 35px;
+    box-sizing: border-box; 
+    height: 100%; 
+    position: absolute; 
+    left: -200px; 
+    transition: left 0.3s ease; 
+}
+
+.gbbtn{
+    color: white;
+}
+
+#gbbtn{
+    color: white;
+}
+
+.sidebar.active {
+    left: 0; /* Show sidebar */
+}
+
+.close-btn {
+    font-size: 15px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    
+}
+
+.close-btn i {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.hamburger {
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    background: none;
+    border: none;
+    position: relative; 
+    margin-left: -15px; 
+    margin-top: -15px;
+    transition: margin-left 0.3s ease; 
+}
+
+.main-content {
+    flex: 1; /* Takes remaining space */
+    padding: 20px;
+    height: 100%; /* Full height */
+    box-sizing: border-box; /* Include padding in height */
+    background-color: rgb(255, 255, 255);
+    transition: margin-left 0.3s ease; /* Smooth transition */
+    margin-top: 45px;
+}
+
+.main-content.active {
+    margin-left: 200px; /* Push content to the right when sidebar is active */
+}
+
+.sidebar-content {
+    margin: 6px 0; /* Spacing between items */
+    padding: 10px; /* Padding for sidebar items */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+    cursor: pointer; /* Pointer cursor for items */
+    font-size: 14px;
+    font-family:'Arial Narrow', Arial, sans-serif;
+}
+
+.sidebar-content:hover {
+    background-color: black;
+}
+
+.sidebar-content i {
+    margin-right: 5px;
+    color: rgb(29, 161, 242);
+}
+
+
+table {
+    width: 100%; /* Adjust width as needed to reduce table size */
+    max-width: 900px; /* Optional: set a maximum width */
+    border-collapse: collapse;
+    font-size: small;
+    margin: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 40px;
+}
+p{
+    text-align: center;
+    background-color: #ffffff;
+    max-width: fit-content;
+    padding: 5px 5px;
+
+}
+h4{
+    text-align: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+table, th, td {
+    border: 1px solid rgb(0, 0, 0);
+    text-align: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+tfoot {
+    background-color: rgb(66, 66, 66); 
+    color: white;                   
+}
+
+.Tablestotals {
+    background-color: rgb(66, 66, 66); 
+    color: white;                   
+}
+
+table caption {
+    color: rgb(214, 0, 0);
+    text-decoration: underline;
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;                   
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #4058b6;
+    color: #fcfcfc;
+}
+caption {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    visibility: hidden; 
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.popup.show {
+    visibility: visible; 
+    opacity: 1; 
+}
+
+.popup h4 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.pre-text {
+    display: flex;
+    justify-content: space-between; /* Aligns the label and value */
+    margin-bottom: 10px;
+    font-size: 16px;
+    gap: 10px;
+}
+
+.pre-text strong {
+    color: #333; /* Left side label color */
+    font-weight: bold;
+    text-align: left;
+    flex: 1; /* Ensures the label takes the left space */
+}
+
+.pre-text span {
+    color: rgba(230, 0, 0, 0.815); /* Right side value color */
+    text-align: right;
+    flex: 1; /* Ensures the value takes the right space */
+}
+
+
+.error {
+    margin-left: 20px;
+    color: rgba(225, 0, 0, 0.671);
+    padding: 10px;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: medium;
+}
+
+input {
+    width: 94%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: medium;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    margin: 10px 0; /* Adjusted margin */
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.loader {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.color-bar {
+    position: absolute;
+    height: 100%;
+    animation: spread 2s infinite forwards;
+}
+
+.color-bar1 {
+    background-color: rgb(17, 255, 69);
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.color-bar2 {
+    background-color: rgb(0, 255, 38);
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.5s;
+}
+
+.color-bar3 {
+    background-color: rgb(152, 255, 167);
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 1s;
+}
+
+@keyframes spread {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 0; }
+}
+
+.loading-text {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: #333; 
+    font-weight: bold; 
+    font-size: 16px; 
+    z-index: 1; 
+}
+
+.disabled {
+    pointer-events: none; 
+    background-color: transparent;
+    color: #333;
+    border: 1px solid black;
+    cursor: not-allowed;  
+    opacity: 0.7;         
+}
+
+.buttonContainer button {
+    transition: opacity 0.3s ease; 
+}
+
+.pixal{
+    display: none;
+    background-color: whitesmoke;
+    font-size: large;
+    font-weight: bold;
+    border: 1px solid black; 
+    border-radius: 5px;
+}
+
+.pixal > div {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    width: 400px;
+}
+
+.pixal img {
+    height: 100px;
+    width: 100px;
+    margin: 15px;
+}
+
+#failure-sms{
+    color: red;
+}
+
+#successful-sms{
+    color: black;
+}
+
+
+
+

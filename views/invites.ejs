@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Invite</title>
+    <link rel="stylesheet" href="src/invites.css">
+    <link rel="icon" href="imgs and icons\fav.png" type="image/x-icon">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="/Deposits">Tellers Deposits Page</a>
+        <a href="/Withdrawals">Tellers Withdrawals Page</a>
+        <a href="/superuser2">Superuser Page</a>
+        <a href="/all-cs-personnels">Costumer Service Page</a>
+        <a href="/accountant">Accountant Page</a>
+        <a href="/operational">Operational Page</a>
+    </nav>
+
+    <div class="form-container">
+        <h1>Choose an Option to Delete</h1>
+        <form id="form1">
+            <button type="button" class="btn" onclick="DelDocs('BMSdelete-form')">Tellers Deposits</button>
+            <button type="button" class="btn" onclick="DelDocs('OtherWithdlsDel-form')">Tellers Withdrawals</button>
+            <button type="button" class="btn" onclick="DelDocs('UIdelete-form')">Tellers Inputs</button>
+            <button type="button" class="btn" onclick="DelDocs('csdelete-form')">Customer Service</button>
+            <button type="button" class="btn">Superuser 1</button>
+            <button type="button" class="btn">Superuser 2</button>
+        </form>
+    </div>
+    <form action="/logout?_method=DELETE" method="POST">
+        <button id="btn3"  type="submit">Log Out</button>
+    </form>
+    <div id="overlay">
+        <div id="BMSdelete-form" class="popup-form">
+            <h2>Deposit Transaction Deletion Form</h2>
+            <form id="susuTransForm" action="/DeleteDoc1" method="post">
+                <label for="Transaction-type">Deposit type:</label>
+                <select id="Transaction-type" name="Transaction" required>
+                    <option value="choose" disabled selected hidden>Select An Option</option>
+                    <option value="ecobank">Ecobank</option>
+                    <option value="fidelity">Fidelity Bank</option>
+                    <option value="Calbank">Calbank</option>
+                    <option value="Other Banks">Other Banks</option>
+                    <option value="mtn">MTN (MoMo)</option>
+                    <option value="Voda">Vodafone (MoMo)</option>
+                    <option value="susu">Susu</option>
+                </select>
+                <label for="name">Transaction ID:</label>
+                <input type="text" name="transID1" placeholder="Enter the Transaction ID" required>
+                <p id="filldelsms" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="deleteBMSConfir()">Preview Inputs</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="Delete-form1" class="popup-form">
+            <h2>Confirm Transaction To Delete</h2>
+            <p class="con-txt">Deposit type:<span id="confir-DTrtyp1" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Transaction ID:<span id="confir-Damt1" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="confirSubmitDel1()">Confirm and Submit</button>
+            <button type="button" onclick="BackD1()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="OtherWithdlsDel-form" class="popup-form">
+            <h2>Withdrawal Transaction Deletion Form</h2>
+            <form id="otherWithDel" action="/deleteOtherWithdrawal" method="post">
+                <label for="withdrawal-type">Withdrawal type:</label>
+                <select id="withdrawal-del" name="withdrawalType" required>
+                    <option value="choose" disabled selected hidden>Select An Option</option>
+                    <option value="G-Money">G-Money</option>
+                    <option value="ATM">ATM</option>
+                    <option value="Ezwich">Ezwich</option>
+                    <option value="Remittances">Remittances</option>
+                    <option value="ecobank">Ecobank</option>
+                    <option value="mtn">MTN (MoMo)</option>
+                    <option value="Voda">Vodafone (MoMo)</option>
+                    <option value="susu">Susu</option>
+                </select>
+                <label for="name">Transaction ID:</label>
+                <input type="text" name="transID2" placeholder="Enter the Transaction ID" required>
+                <p id="deleteSms2" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="showOtherWithdDelForm()">Preview Inputs</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="confirDel-form" class="popup-form">
+            <h2>Confirm Transaction To Delete</h2>
+            <p class="con-txt">Withdrawal type: <span id="confirm-withd-del" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Transaction ID: <span id="confirm-name-del" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="submitOtherWithdDelete()">Confirm and Submit</button>
+            <button type="button" onclick="BackodD()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="UIdelete-form" class="popup-form">
+            <h2>Teller (User) Input Deletion Form</h2>
+            <form id="userInputType" action="/deleteUserInput" method="post">
+                <label for="Transaction-type">Teller input type:</label>
+                <select id="userInput-type" name="userInput" required>
+                    <option value="choose" disabled selected hidden>Select An Option</option>
+                    <option value="Initial Physical Cash">Initial Pcash</option>
+                    <option value="Physical Cash Collected">Pcash Collected</option>
+                    <option value="Expenses">Expenses</option>
+                    <option value="Cash To Bank">Cash To Bank</option>
+                    <option value="Physical Cash Remaining">Physical Cash Remaining</option>
+                </select>
+                <label for="amount">Transaction ID:</label>
+                <input type="text"  name="InpID" placeholder="Enter the Transaction ID" required>
+                <p id="filldelsms2" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="UserIpConfir()">Preview Inputs</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="confIpDel-form" class="popup-form">
+            <h2>Confirm Deletion Inputs</h2>
+            <p class="con-txt">Teller input type:<span id="confir-Ip2" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Transaction ID: <span id="confir-Ip3" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="UserIpSubmit()">Confirm and Submit</button>
+            <button type="button" onclick="BackIp()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="csdelete-form" class="popup-form">
+            <h2>Customer Service Input Deletion Form</h2>
+            <form id="csInputType" action="/deleteCSInput" method="post">
+                <label for="Transaction-type">Input type:</label>
+                <select id="csInput-type" name="csInput" required>
+                    <option value="choose" disabled selected hidden>Select An Option</option>
+                    <option value="Ecobank Withdrawal">Ecobank Withdrawal</option>
+                    <option value="Express Account Created">Express Account Created</option>
+                </select>
+                <label for="ID">Transaction ID:</label>
+                <input type="text"  name="csID" placeholder="Enter the Transaction ID" required>
+                <p id="filldelsms3" class="error" style="display:none;">Please all fields are required!!</p>
+                <button type="button" onclick="CsIpConfir()">Preview Inputs</button>
+            </form>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <div id="confCsDel-form" class="popup-form">
+            <h2>Confirm Deletion Inputs</h2>
+            <p class="con-txt">Input type:<span id="confir-cs2" class="notes" style="text-decoration: underline;"></span></p>
+            <p class="con-txt">Transaction ID: <span id="confir-cs3" class="notes" style="text-decoration: underline;"></span></p>
+            <button type="button" onclick="CsIpSubmit()">Confirm and Submit</button>
+            <button type="button" onclick="BackCs()">Back</button>
+            <hr>
+            <button type="button" onclick="hideForm()">Close</button>
+        </div>
+        <span id="loading" class="loader"></span>
+
+        <div id="failure-sms" class="pixal">
+            <div>
+                <img src="imgs and icons/icons8-wrong.gif" >
+                <div id="fail-txt">Error Occurred While Processing Request, Please Try Again !</div>
+            </div>
+        </div> 
+
+        <div id="success-sms" class="pixal">
+            <div>
+                <img src="imgs and icons/Animation-Trash-2.gif">
+                <div id="success-txt">Document Is Deleted Successfully</div>
+            </div>
+        </div>
+
+        <div id="failure-sms-delE" class="pixal">
+            <div>
+                <img src="imgs and icons/icons8-error.gif" >
+                <div id="unexist-txt">Document Does Not Exist!</div>
+            </div>
+        </div>
+    </div>
+    <script src="src/invite.js"></script>
+    <script src="src/inactivityTimer.js"></script>
+</body>
+</html>

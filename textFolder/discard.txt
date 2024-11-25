@@ -1,0 +1,162 @@
+const csDocs1 = (req, res, next) => {
+    const name = req.user.name;
+    const branch = req.user.branch;
+    
+    // Set start time to 7:30 PM of the current day
+    const startOfRange = new Date();
+    startOfRange.setHours(19, 30, 0, 0);
+
+    // Set end time to 7:30 PM the next day
+    const endOfRange = new Date(startOfRange.getTime() + 24 * 60 * 60 * 1000);
+
+    CSEcobankWithdls.countDocuments({
+        CSName: name,
+        CSBranch: branch,
+        Timestamp: {
+            $gte: startOfRange, 
+            $lt: endOfRange 
+        }
+    })
+    .then(csd1 => {
+        req.csd1 = csd1;
+        next(); 
+    })
+    .catch(err => {
+        console.error("Error counting documents:", err);
+        res.status(500).send("Error counting documents");
+    });
+};
+
+
+
+
+const getEcobankAccountData = (req, res, next) => {
+    // Set start and end times for the 7:30 PM to 7:30 PM range
+    const startOfRange = new Date();
+    startOfRange.setHours(19, 30, 0, 0);
+    const endOfRange = new Date(startOfRange.getTime() + 24 * 60 * 60 * 1000);
+
+    // Query to count amounts grouped by account type within the 24-hour range
+    COverallColt.aggregate([
+        {
+            $match: {
+                AccountType: "Ecobank",
+                Document: "Account Balance Doc",
+                Timestamp: { $gte: startOfRange, $lt: endOfRange }
+            }
+        },
+        {
+            $group: {
+                _id: "$Description",
+                totalAmount: { $sum: "$Amount" }
+            }
+        }
+    ])
+    .then(accountData => {
+        // Initialize the account totals
+        const accountSummary = {
+            "54. ACCOUNT": 0,
+            "20. ACCOUNT": 0,
+            "10. ACCOUNT": 0,
+            "80. ACCOUNT": 0,
+            accountTotal: 0
+        };
+
+        // Assign totals to respective accounts
+        accountData.forEach(account => {
+            if (accountSummary.hasOwnProperty(account._id)) {
+                accountSummary[account._id] = account.totalAmount;
+                accountSummary.accountTotal += account.totalAmount;
+            }
+        });
+
+        // Attach to req for use in rendering
+        req.accountSummary = accountSummary;
+        next();
+    })
+    .catch(err => {
+        console.error("Error fetching account data:", err);
+        res.status(500).send("Error fetching account data");
+    });
+};
+
+
+const calculateCommissions = async (req, res, next) => {
+    const startOfRange = new Date();
+    startOfRange.setHours(0, 0, 0, 0); 
+
+    const endOfRange = new Date(startOfRange);
+    endOfRange.setHours(23, 59, 59, 999);
+  
+    const commissionData = {
+      'AIYINASI TELLER 1': 0,
+      'AIYINASI TELLER 2': 0,
+      'BOGOSO TELLER 1': 0,
+      'BOGOSO TELLER 2': 0,
+      'PRESTEA TELLER 1': 0,
+      'PRESTEA TELLER 2': 0
+    };
+  
+  
+    const momoCommissions = await UserMoMoCollection.aggregate([
+      { $match: { Description: "Deposit", Timestamp: { $gte: startOfRange, $lt: endOfRange } } },
+      {
+        $group: {
+          _id: { TellerType: "$TellerType", TheBranch: "$TheBranch" },
+          totalCommission: { $sum: "$Commission" }
+        }
+      }
+    ]);
+  
+    const bankCommissions = await Transaction.aggregate([
+      { $match: { Bank: "Other Banks", Description: "Deposit", Timestamp: { $gte: startOfRange, $lt: endOfRange } } },
+      {
+        $group: {
+          _id: { TellerType: "$TellerType", TheBranch: "$TheBranch" },
+          totalCommission: { $sum: "$Commission" }
+        }
+      }
+    ]);
+  
+    // Combine teller commissions into commissionData
+    momoCommissions.concat(bankCommissions).forEach((entry) => {
+      const tellerKey = `${entry._id.TheBranch.toUpperCase().replace("-", " ")} ${entry._id.TellerType.toUpperCase().replace("-", " ")}`;
+      if (commissionData[tellerKey] !== undefined) {
+        commissionData[tellerKey] += entry.totalCommission;
+      }
+    });
+  
+    // Calculate additional commissions
+    const additionalCommissions = await COverallColt.aggregate([
+      {
+        $match: {
+          Document: "Expenses & Commission Doc",
+          Timestamp: { $gte: startOfRange, $lt: endOfRange },
+          TransactionType: "Commission"
+        }
+      },
+      {
+        $group: {
+          _id: "$Description",
+          totalAmount: { $sum: "$Amount" }
+        }
+      }
+    ]);
+  
+    // Add additional commissions to commissionData object
+    const extraCommissionMap = {
+      'EZWICH': 'Ezwich',
+      'REMITTANCE': 'Remittance',
+      'INTERBANK COMMISSION': 'Interbank Commission'
+    };
+  
+    additionalCommissions.forEach((entry) => {
+      const key = extraCommissionMap[entry._id.toUpperCase()];
+      if (key) {
+        commissionData[key.toUpperCase()] = entry.totalAmount;
+      }
+    });
+  
+    req.commissionData = commissionData;
+    next();
+};
